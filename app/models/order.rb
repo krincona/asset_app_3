@@ -54,7 +54,7 @@ class Order < ActiveRecord::Base
 
   def after_initialize_callbacks
     if self.is_open?
-      #self.check_status 
+      self.check_status 
       self.calculate_price_amounts
       self.calculate_datelines
     end
