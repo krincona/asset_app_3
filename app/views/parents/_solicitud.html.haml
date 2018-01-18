@@ -1,0 +1,26 @@
+.modal-dialog
+  .modal-content
+    / Modal Header
+    .modal-header
+      %button.close{"data-dismiss" => "modal", :type => "button"}
+        %span{"aria-hidden" => "true"} ×
+        %span.sr-only Close
+      %h4#myModalLabel.modal-title
+        Solicita Tutorias
+    
+    = simple_form_for(@order) do |f|
+      / Modal Body
+      .modal-body
+        = f.error_notification
+      
+        .form-inputs#horario-form
+          = f.simple_fields_for :materias do |materia|
+            = render 'orders/materia_fields', f: materia
+      
+            %button.pull-right.btn-asset.btn-block.links.add_subject{:type=>"button"}
+              = link_to_add_association 'Agregar Materia', f, :materias
+      / Modal Footer
+      .modal-footer
+        .actions
+          
+          = f.button :submit, "Siguiente", class:"btn btn-asset btn-block"

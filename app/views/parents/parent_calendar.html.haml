@@ -1,0 +1,10 @@
+= provide(:title, 'Estudiantes | Calendario')
+.container
+  - flash.each do |name, msg|
+    = content_tag :div, msg, class: "alert alert-info"
+  .row
+    .panel.panel-default
+      .panel-heading.text-center
+        %h4 Calendario Tutorias
+  .row-fluid
+    %div= render partial: 'parents/calendar'

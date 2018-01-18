@@ -1,0 +1,16 @@
+.modal-dialog
+  .modal-content
+    .modal-header#myModalLabel
+      %button.close{"data-dismiss" => "modal", :type => "button"}
+        %span{"aria-hidden" => "true"} ×
+        %span.sr-only Close
+      %h4.modal-title
+        Titulo
+      = simple_form_for [@order,@materia], url: new_order_materia_path(:order_id=>params[:id]), remote: true do |f|
+        .modal-body
+          .form-inputs
+            = f.input :name
+        .modal-footer
+          = f.submit "Agregar", class: "btn btn-asset-purple btn-lg btn-block"
+          %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"}
+            Cancelar

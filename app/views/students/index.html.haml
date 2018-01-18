@@ -1,0 +1,53 @@
+%p#notice= notice
+
+.page-header
+  .row-fluid
+    %h3{align: 'left'}= @institute.name
+
+
+.row-fluid
+  .col-md-9{align: 'left'}
+    .panel.panel-default
+      .panel-heading{align: 'left'}
+        %h4 Estudiantes Activos
+      .panel-body
+        .table-responsive
+          %table.table.table-striped.table-hover
+            %thead
+              %tr      
+                %th= sort_link @query, "Nombre Estudiante"
+                %th= sort_link @query, "Curso"
+                %th= sort_link @query, "Asignaturas" 
+                %th
+
+            %tbody
+              -  @institute_students.each do |student|
+                %tr
+                  %td= student.name.split.map(&:capitalize).join(' ')
+                  %td= student.grade
+                  %td= student.subjects_all.join(",")
+                  %td= link_to "ver detalle", student
+  
+
+  .col-md-3{align: 'right'}
+    .panel.panel-default
+      .panel-heading{align: 'left'}
+        %h4 Filtros
+      .panel-body
+      = search_form_for @query, url: students_path, :builder => SimpleForm::FormBuilder do |q|
+        %table.table
+          %tr
+            %td
+              = q.label "Nombre", required: false
+              = q.search_field :name_cont, label: "Nombre"
+          %tr
+            %td
+              = q.label "Curso", required: false
+              = q.select :grade_eq, options_for_select([1,2,3,4,5,6,7,8,9,10,11,12,13]), include_blank: true, selected: @query.grade
+          %tr
+            %td
+              = q.label "Materia", required: false
+              = q.select :materias_name_cont, TutoriaInstance::SUBJECTS,include_blank: true
+          %tr
+            %td= q.submit "Filtrar"
+%br

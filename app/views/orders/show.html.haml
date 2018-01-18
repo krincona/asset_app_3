@@ -1,0 +1,48 @@
+= provide(:title, 'Ordenes | Confirmación')
+
+.container
+  .row
+    .panel-group
+      .panel.panel-default
+        .panel-heading.text-center
+          %h3 !Eso es todo! Ahora mismo más de cien tutores están revisando tu solicitud.
+          .spinner
+            .rect1
+            .rect2
+            .rect3
+            .rect4
+            .rect5
+        .row.totals
+          .col-xs-6
+            %span.itemName Total: 
+            %span.price= number_to_currency(@order.sale_price,:unit=> '$', :precision => 0, :format => '%u%n')
+          .col-xs-6
+            %span.itemName # Ref. 
+            %span.price= @order.serial
+
+        .row.col-sm-11.col-sm-offset-1
+          %p.itemName2{:style => "text-align:justify"}= "Recibirás un mensaje de Whatsapp con los datos del tutor asignado. Para confirmar la asistencia, debes realizar el pago antes de las 6:00 p.m. del #{I18n.l @order.payment_dateline, format: "%A %B %d, %Y"}. Si el pago se realiza después de esta fecha/hora, se reprogramarán las tutorías en otras fechas. No aplican reembolsos."
+        .row
+          %h4{:style => "text-align:center"} Medios de pago
+          %h5 Pago online
+          .col-xs-8
+            %p.itemName2{:style => "text-align:justify"} Paga ahora desde tu cuenta de ahorros o corriente dando clic en el botón PSE.
+          .col-xs-4
+            %a.nav-brand{:href => "https://www.psepagos.co/PSEHostingUI/ShowTicketOffice.aspx?ID=744#", :target => "_blank"}
+              %img.square{:alt => "PSE logo", :src => "/images/pse.png"}/
+
+
+        .row.push-left
+          %h5 Consignación Bancolombia
+          .col-xs-8
+            %p.itemName2{:style => "text-align:justify"}Cta ahorros # 69488785338 a nombre de ASSET Tutores. Consignaciones fuera de Bogotá adicionar $10,000. Importante: Debes enviar foto de la consignación realizada.
+          .col-xs-4
+
+
+
+  .row
+    .btn-group.btn-group-justified{"aria-label" => "button-group", :role => "group"}
+      .col-xs-6{"style"=>"float: right;"}
+        = link_to 'Regresar', order_materias_path(@order), {class: "btn btn-asset btn-lg btn-block"}
+      .col-xs-6
+        = #link_to 'Finalizar', find_tutor_order_path(@order), {class: "btn btn-asset btn-lg btn-block"}

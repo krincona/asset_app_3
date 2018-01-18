@@ -1,0 +1,37 @@
+.row-fluid
+  .panel-group{:id=>"accordion"}
+    = simple_form_for(@parent) do |f|
+      .panel.panel-default
+        .panel-heading.text-center
+          %button.btn.btn-asset.btn-lg.btn-block.accordion-toggle{"data-toggle" => "collapse", "data-parent" => "#accordion", :href=>"#collapse_parentInfo"}
+            %i.fa.fa-user
+            %span
+            Datos del acudiente
+        .panel-collapse.collapse{:id=>"collapse_parentInfo"}
+          .panel-body.text-left
+            = f.input :name, label: false, placeholder: 'Nombres y Apellidos', required: true
+            = f.input :card_id_type, collection: ['c.c.', 'c.e.', 'nit', 'Pasaporte', 'Otro'], label: false, prompt: 'Tipo de Identificación', required: true
+            = f.input :card_id, label: false, placeholder: 'Número de Identificación', required: true
+            = f.input :address, label: false, placeholder: 'Dirección', required: true
+            = f.input :phone_main, label: false, placeholder: 'Celular', required: true
+            = f.input :phone_alt1, label: false, placeholder: 'Otro Teléfono', required: false
+            
+            
+      .panel.panel-default
+        .panel-heading.text-center
+          %button.btn.btn-asset.btn-lg.btn-block.accordion-toggle{"data-toggle" => "collapse", "data-parent" => "#accordion", :href=>"#collapse_studentsInfo"}
+            %i.fa.fa-user-plus
+            %span
+            Datos de los estudiantes
+        .panel-collapse.collapse{:id=>"collapse_studentsInfo"}
+          = f.simple_fields_for :students do |student|
+            = render 'student_fields', f: student
+          .add_student.links.pull-right
+            = link_to_add_association 'Agregar Estudiante', f, :students
+      %br/
+      = f.submit @parent.new_record? ? "Listo!" : "Actualizar",  class: "btn btn-asset-purple btn-block"
+      
+:javascript
+  $(document).ready(function(){
+      $(".remove_student_link").hide();
+  });

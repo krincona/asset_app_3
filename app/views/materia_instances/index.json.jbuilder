@@ -1,0 +1,1 @@
+json.array! @materia_instances, partial: 'materia_instances/materia_instance', as: :materia_instance

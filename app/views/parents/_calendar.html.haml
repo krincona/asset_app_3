@@ -1,0 +1,24 @@
+%h5
+  .label.label-danger  Pago pendiente
+  .label.label-success Tutor confirmado
+- if !@materia_instances.nil?
+  %h4
+    #this
+    = month_calendar attribute: :at_date, events: @materia_instances,  table: {class: "table table-bordered"}, tr: {class: "calendar-row"}, td:{class: "day"}  do |date,instances|
+      = date.day
+      -instances.each do |instance|
+        - if instance.confirmada?
+          - if instance.at_date < Date.today
+            %div
+              %h5= link_to instance.materia.resume_parent + " con #{instance.tutor.shortname}" , materia_instance_path(instance.id), {:style => 'color:#959e91;',:class => "css_class"}
+          - else
+            %div
+              %h5= link_to instance.materia.resume_parent + " con #{instance.tutor.shortname}" , materia_instance_path(instance.id), {:style => 'color:#4bed10;',:class => "css_class"}
+        - else
+          %div
+            %h5= link_to instance.materia.resume_parent + " con #{instance.tutor.shortname}", materia_instance_path(instance.id), {:style => 'color:#f01616;',:class => "css_class"}
+
+
+
+
+

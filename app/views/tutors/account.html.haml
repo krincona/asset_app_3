@@ -1,0 +1,33 @@
+= provide(:title, 'Tutor | Cuenta')
+
+%h3= "Tus horas de #{(I18n.l Date.today - 1.month, format: "%B").capitalize}."
+%table.rwd-table
+  %thead
+    %tr
+      %th Orden
+      %th Estudiante
+      %th Fecha
+      %th Hora
+      %th Duración
+      %th Subtotal
+      %th Subsidio
+      %th Total
+  %tbody
+    - @materia_instances.each do |inst|
+      %tr
+        %td{"data-th"=>"Orden"}= inst.order.serial
+        %td{"data-th"=>"Estudiante"}= inst.student.name
+        %td{"data-th"=>"Fecha"}= I18n.l inst.at_date, format: "%a %F"
+        %td{"data-th"=>"Hora"}= I18n.l inst.at_time, format: " %I:%M %p"
+        %td{"data-th"=>"Duración"}= inst.duration
+        %td{"data-th"=>"Subtotal"}= number_to_currency(inst.tutor_payable, :unit=> '$', :precision => 0, :format => '%u%n')
+        %td{"data-th"=>"Subsidio"}= number_to_currency(inst.subsidy, :unit=> '$', :precision => 0, :format => '%u%n')
+        %td{"data-th"=>"Total"}= number_to_currency(inst.total_payable, :unit=> '$', :precision => 0, :format => '%u%n')
+.row
+  .totals
+    .col-xs-6
+      %span.itemName Total:
+      %span.price= number_to_currency(@tutor.total_account,:unit=> '$', :precision => 0, :format => '%u%n')
+    .col-xs-6
+      %a.btn.btn-asset.btn-lg{:href=>"#{account_acceptance_tutor_path(@tutor.id)}"} Aceptar
+

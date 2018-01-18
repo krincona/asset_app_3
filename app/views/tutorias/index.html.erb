@@ -1,0 +1,37 @@
+<%= provide(:title, 'Tutor | Busqueda de Tutorias')%>
+
+<% flash.each do |name, msg| %>
+<%= content_tag :div, msg, class: "alert alert-info" %>
+<% end %>
+
+
+<div class="row-fluid">
+  <% if @tutor.status %>
+    <div class="col-md-12" id='header-search'>
+      <%= search_form_for @query, url: tutorias_path do |q|%>
+      <%= q.search_field :subject_cont, placeholder: "Materia" %>
+      <%= q.submit "Buscar"%>
+      <%end%>
+
+    </div>
+    </br>
+    </br>
+    <div class="col-md-12">
+      <div id="list"><%= render partial: 'tutorias/list' %></div>
+    </div>
+    <% else %>
+    <p>NO esta activo </p>
+  <% end %>
+</div>
+
+
+
+<script>
+$(document).ready(
+         function() {
+          setInterval(function() {
+            $('#list').load(document.URL + ' #list');
+        }, 60000);
+    })
+</script>
+

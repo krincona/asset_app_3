@@ -1,0 +1,20 @@
+.container
+    .page-header
+        %h3{align:'left'}= @student.name
+    %p#notice= notice
+    
+    .row-fluid
+        %table.table.table-hover
+            %tr
+                %th Colegio
+                %td= @student.school
+            %tr
+                %th Curso
+                %td= @student.grade
+            %tr
+                %th Email
+                %td= @student.email
+            %tr
+                %th Celular
+                %td= @student.phone
+        

@@ -1,0 +1,1 @@
+json.partial! "materia_instances/materia_instance", materia_instance: @materia_instance

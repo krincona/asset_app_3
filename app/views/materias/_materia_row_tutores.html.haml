@@ -1,0 +1,65 @@
+.panel.panel-default
+  .panel-heading
+
+    .btn-group.btn-group-justified{"aria-label" => "button-group",
+    :role => "group"}
+
+      .col-xs-9.pull-left
+
+        %a.btn.btn-asset.btn-block{:type=>"button",:style=>"white-space:normal",
+        "data-parent" => "#accordion", "data-toggle" => "collapse",
+        :href => "#collapse#{materia.id}", "white-space"=>"normal" }
+          .text-left
+            = materia.resume_materia
+          .text-left
+            -if materia.weekly
+              .label.label-default Fija Semanal
+
+      .col-xs-3
+        %a.button.btn.btn-asset.btn-block{:type => "button",
+        "data-confirm" => "¿Esta usted seguro?",
+        :href => "#{ tutor_postulation_materia_path(materia)}",
+        :style=>"align:center", "white-space"=>"normal"}
+          .text-center
+            %i.fa.fa-paper-plane-o.fa-2x{"aria-hidden"=>"true"}
+
+
+
+  .panel-collapse.collapse{:id=>"collapse#{materia.id}"}
+    .panel-body
+      .col-xs-5.col-offset-1
+        %h6= "(#{materia.order.serial}) Materia: #{materia.name}"
+        %h6="Temas: #{materia.topic}"
+        %h6="Direccion: #{materia.order.student.parent.address} "
+        %h6="Subsidio: #{number_to_currency(materia.order.student.parent.subsidy_amount,:unit => '$', :precision => 0, :format => '%u%n' )}"
+      .col-xs-5.col-offset-1
+        -if materia.weekly
+          Fija Semanal
+        %h6="Alumno: #{materia.order.student.name}"
+        %h6="Colegio/Uni: #{materia.order.student.school}"
+        %h6="Curso: #{materia.order.student.grade}"
+
+
+
+      .col-xs-11.col-offset-1
+        %table{:align => "center", :width => "100%"}
+          %thead
+            %tr
+              %th
+                %h6 Fecha
+              %th
+                %h6 Hora
+              %th
+                %h6 Duración
+
+          -materia.materia_instances.select {|i| i.materia_instance_status_id==1}.each do |instance|
+            %tr
+              %td
+                %h6= I18n.l instance.at_date, format: "%a %B %d, %Y"
+              %td
+                %h6= I18n.l instance.at_time, format: "%I:%M %p"
+              %td
+                %h6= instance.duration
+
+
+

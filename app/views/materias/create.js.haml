@@ -1,0 +1,9 @@
+$('#dialog').modal('toggle');
+
+$('#materias').append("#{j render "materias/materia_row", materia: @materia}");
+
+$('#materia#{@materia.id}').replaceWith("#{ j render "materias/materia_row", materia:@materia}");
+
+$('#totals').replaceWith("#{ j render "materias/solicitudTotal_row"}");
+
+$('#cartTotals').replaceWith("#{ j render "materias/cartTotal_row"}");

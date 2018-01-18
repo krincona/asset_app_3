@@ -1,0 +1,57 @@
+.div.form-group.col-sm-10.col-sm-offset-1
+
+= simple_form_for [@materia.order, @materia], url: @url, remote: true do |f|
+  - if f.object.new_record?
+    .form-group.row
+      %label.col-xs-6.col-form-label{for:"weekly-input"} Plan tutor fijo (pago mensual)
+      .col-xs-6
+        = f.input :weekly, label: "¡Si, quiero mi tutor fijo semanal!", type:"checkbox", class:"form-control", id:"weekly-input"
+    .row{style:"display:none"}
+      .col-sm-10.col-sm-offset-1.text-left
+        %p La(s) fecha(s) corresponden a la primera sesion de tutoria.
+  
+
+    = f.input_field :name, as: :hidden, :input_html=>{value:"#{@materia.name}"}, required: true
+    
+
+
+  .form-group.row
+    %label.col-xs-4.col-form-label{for:"topic-input"} Temas
+    .col-xs-8
+      = f.input_field :topic, as: :text, type:"text", class:"form-control", id:"topic-input", required: true
+      
+  .form-group.row
+    %label.col-xs-4.col-form-label{for:"name-input"} #Estudiantes
+    .col-xs-8
+      = f.input_field :students_number, value: f.object.students_number || 1, type: "number", min:1, max:4, step: 1, :style => "width:70px",class:"form-control", id:"students-number-input",required: true
+  
+  #instances
+    = f.simple_fields_for :materia_instances do |instance|
+      = render 'materias/instance_fields', f: instance
+    .add_subject.links.pull-right
+      = link_to_add_association 'Añadir fecha', f, :materia_instances, partial: 'materias/instance_fields'
+
+  .row
+    .btn-group.btn-group-justified{"aria-label" => "button-group", :role => "group"}
+      .class-xs-4
+        %a.btn.btn-asset-purple.btn-block{"data-dismiss" => "modal", :type => "button"} Volver
+      .class-xs-4
+        = f.submit @materia.new_record? ? "Agregar a carrito" : "Actualizar", class: "btn btn-asset-purple btn-block"
+      .class-xs-4
+        - if !@materia.new_record?
+          = link_to "Borrar Materia", order_materia_path(@materia.order,@materia), { :method=> :delete,:remote => true, class: "btn btn-asset-purple btn-block"}
+
+
+
+
+:javascript
+  function evaluate(){
+    var item = $(this);
+
+    if(item.is(":checked")){
+      $("#toggle-div").show();
+    }else{
+      $("#toggle-div").hide();
+    }
+  }
+  $('input[type="checkbox"]').click(evaluate).each(evaluate);

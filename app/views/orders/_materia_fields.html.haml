@@ -1,0 +1,44 @@
+.nested-fields
+    .row
+        .pull-right
+            = link_to_remove_association "Borrar", f
+    .div.form-group
+        %label.radio-inline
+            %input{:class=>"repeat_check",:checked => "checked",:name => "optradio", :type => "radio"}>/
+            Fijas Semanales
+        %label.radio-inline
+            %input{:name => "optradio", :type => "radio"}>/
+            Fechas Especificas
+    = f.input :name, label: false, prompt:"Escoje la materia", as: :select, collection: TutoriaInstance::SUBJECTS, required: true
+    = f.input :at_time, as: :times_picker, placeholder:"Escoje la hora",label:false
+    = f.input :duration, as: :decimal, label: false,:input_html => {:min => 1.5,:max => 3.0, :step=>0.5}, placeholder:"Escoje la duración"
+    = #f.input :wdays, label: false, input_html:{class: 'weekday_input'},prompt:"Escoje el dia", as: :select, collection: I18n.t(:"date.day_names"),:item_wrapper_class => 'inline'
+    .div.weekday_input.form-group.select.required.order_materias_wdays
+
+        .weekDays-selector
+            %input#weekday-mon.weekday{:type => "checkbox"}/
+            %label{:for => "weekday-mon"} Lu
+            %input#weekday-tue.weekday{:type => "checkbox"}/
+            %label{:for => "weekday-tue"} Ma
+            %input#weekday-wed.weekday{:type => "checkbox"}/
+            %label{:for => "weekday-wed"} Mi
+            %input#weekday-thu.weekday{:type => "checkbox"}/
+            %label{:for => "weekday-thu"} Ju
+            %input#weekday-fri.weekday{:type => "checkbox"}/
+            %label{:for => "weekday-fri"} Vi
+            %input#weekday-sat.weekday{:type => "checkbox"}/
+            %label{:for => "weekday-sat"} Sa
+            %input#weekday-sun.weekday{:type => "checkbox"}/
+            %label{:for => "weekday-sun"} Do
+
+
+
+    .date_input
+        = f.input :at_date, as: :dates_picker,label: false, placeholder:"Escoje la fecha", :input_html => {:type=>"date"}
+    = f.input :topic, as: :text, label: false, placeholder:"Temas/Observaciones", :input_html => {size: '50px'}
+    
+
+
+:javascript
+    add_toggle();
+            

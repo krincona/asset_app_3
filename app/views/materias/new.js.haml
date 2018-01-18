@@ -1,0 +1,10 @@
+// Add the dialog title
+$('#dialog h4').html("#{j @order.student.name}");
+$('#dialog h5').html("Escoje la materia. Luego podrás escoger una o varias fechas y horarios. Te recomendamos el Plan Tutor Fijo: solícitalo una vez y tendras el mismo tutor semanalmente hasta el final del semestre.  ");
+// Render the new form
+
+$('.modal-body').html("#{ j render(partial: 'materias/form')} ");
+// Show the dynamic dialog
+$('#dialog').modal("show");
+
+$(".remove_fields").hide();

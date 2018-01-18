@@ -1,0 +1,5 @@
+- if @materia.error.empty?
+  $('panel-group').append('= j render "materias/row", materia: @materia');
+  $('#materia-modal').modal('hide');
+- else
+  alert('@materia.errors.full_message[0]');

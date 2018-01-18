@@ -1,0 +1,9 @@
+= provide(:title, 'Papas| Incio')
+.row-fluid
+  .page-header
+    %h2= "Pagina Inicial - #{@parent.name}"
+
+
+.row
+  - @parent.students.each do |student|
+    %a.btn.btn-primary.btn-lg.btn-block{:href => student_path(student.id)}= student.name

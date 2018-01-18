@@ -1,0 +1,50 @@
+<fieldset class="tutoria_option", id="repeats_weekly_options">
+  <%= cf.input :weekly_on, as: :select, collection: ['Domingo','Lunes','Martes','Miercoles','Jueves','Viernes','Sabado'], multiple: true, label:'Los dias' %>
+</fieldset>
+<fieldset class="tutoria_option", id="repeats_daily_options">
+  <%= cf.input :every_n_days, label:"Cada n dias", min:1, value:1 %>
+  <%= cf.input :daily_until, as: :just_datetime_picker, label:'Hasta el' %>
+  <%= cf.input :daily_n_times, label:'N veces'%>
+</fieldset>
+
+
+
+<script>
+  $(function() {
+    var toggle_tutoria_options = function(){
+      $('.tutoria_option').hide();
+      switch ($('#tutoria_recurrence').val())
+      {
+        case 'Nunca':
+        // Nothing
+        break;
+        case 'Diario':
+        $('.tutoria_option').show();
+        break;
+        case 'Semanal':
+        break;
+        case 'Semanal -Tareas':
+        break;
+      }
+    }
+    toggle_tutor_ship_options();
+    $('#tutor_ship_recurring').on('change',function(){
+      toggle_tutor_ship_options();
+    });
+    var toggle_repeat_ends_on = function(){
+      switch ($('#task_repeat_ends').val())
+      {
+        case 'never':
+          $('#task_repeat_ends_on').hide();
+          break;
+        case 'on':
+          $('#task_repeat_ends_on').show();
+          break;
+      }
+    }
+    toggle_repeat_ends_on();
+    $('#task_repeat_ends').on('change',function(){
+      toggle_repeat_ends_on();
+    });
+  });
+</script>

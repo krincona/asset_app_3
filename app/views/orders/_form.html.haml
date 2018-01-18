@@ -1,0 +1,45 @@
+:javascript
+  function add_toggle(){console.log("click!");
+    $(".repeat_check").change(function(){
+      
+      if ($(this).is(':checked')) {
+        $(this).closest(".nested-fields").find(".weekday_input").show();
+        $(this).closest(".nested-fields").find(".date_input").hide().val("");
+      }
+      else {
+        $(this).closest(".nested-fields").find(".date_input").show();
+        $(this).closest(".nested-fields").find(".weekday_input").hide().val("");
+      }
+    });
+  }
+
+= simple_form_for @order do |f|
+  = f.error_notification
+  %h4 Tutorias
+  .form-inputs
+    = f.simple_fields_for :materias do |materia|
+      = render 'orders/materia_fields', f: materia
+  .add_subject.links.pull-right
+    = link_to_add_association 'Agregar Materia', f, :materias, partial: 'orders/materia_fields', remote: true
+  .actions         
+    = f.button :submit, "Finalizar", class:"btn btn-asset btn-block step last"
+
+
+
+
+:javascript
+  $(document).ready(function(){
+      $(".remove_student_link").hide();
+      $(".repeat_check").change(function(){
+        
+        if ($(this).is(':checked')) {
+          $(this).closest(".nested-fields").find(".weekday_input").show();
+          $(this).closest(".nested-fields").find(".date_input").hide().val("");
+        }
+        else {
+          $(this).closest(".nested-fields").find(".date_input").show();
+          $(this).closest(".nested-fields").find(".weekday_input").hide().val("");
+        }
+      });
+      
+  });

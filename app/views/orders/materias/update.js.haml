@@ -1,0 +1,5 @@
+- if @materia.error.empty?
+  $('panel-group panel#=@materia.id').replaceWith('= j render "materias/row", materia: @materia');
+  $('#materia-modal').modal('hide');
+- else
+  alert('@materia.errors.full_message[0]');

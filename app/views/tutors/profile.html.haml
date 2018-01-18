@@ -1,0 +1,48 @@
+= provide(:title, 'Tutor | Perfil')
+
+.row-fluid
+	.page-header
+		%a.pull-left
+			%img.media-object.img-circle{src:'/images/sample_tutor.jpg'}
+		
+		.media-body
+			.media-heading			
+			%h3= @tutor.name
+		%h5= "#{@tutor.major} #{@tutor.university}"
+
+
+.row-fluid
+	.col-md-6
+		.panel.panel-default
+			.panel-heading{align:'left'}	
+				%h5 Materias que puedo dictar
+			.panel-body
+				%ul
+					- @tutor.profile[1..-1].each do |p|
+						%li= p						
+	.col-md-6
+		.panel.panel-default
+			.panel-heading{align:'left'}	
+				%h5 Me siento experto en
+			.panel-body
+				%ul
+					- @tutor.specific_experience.split(',').each do |p|
+						%li= p 
+.row-fluid
+	.col-md-12
+		.panel.panel-default
+			.panel-heading{align:'left'}	
+				%h5 He trabajado con alumnos de
+			.panel-body
+				%ul
+					- @tutor.school_experience.split(',').each do |p|
+						%li= p
+.row-fluid
+	.col-md-12
+		.panel.panel-default
+			.panel-heading{align:'left'}
+				%h5 Puedo dictar las tutorias en
+			.panel-body
+				%ul
+					- @tutor.language_experience[1..-1].each do |p|
+						%li= p

@@ -1,0 +1,10 @@
+.panel-body
+	.nested-fields
+		.row
+			.pull-right
+				= link_to_remove_association "Borrar Estudiante", f
+
+		= f.input :name, label: false, placeholder: 'Nombre Completo', required: true, input_html: {class: 'student_name_input'}
+		= f.input :school, label: false, placeholder: 'Colegio / Universidad', required: true
+		= f.input :grade, label: false, placeholder: 'Grado', required: true
+

@@ -1,0 +1,32 @@
+<div class="container">
+
+  <h4>
+    <div id="this">
+      <%= month_calendar attribute: :at_date, events: @mytutoria_instances, table: {class: "table table-bordered"}, tr: {class: "calendar-row"}, td: {class: "day"}  do |date,instances|%>
+        <%= date.day %>
+        <%instances.each do |instance| %>
+          <% if instance.confirmada? %>
+            <% if instance.at_date < Date.today %>
+              <div><h5><%=link_to instance.materia.resume_instance + I18n.l(instance.at_time, format:'%I:%M %p'), materia_instance_path(instance.id), {:style=>'color:#959e91;', :class => "css_class"} %></h5></div>
+            <% else %>
+              <div ><h5><%=link_to instance.materia.resume_instance + I18n.l(instance.at_time, format:'%I:%M %p'), materia_instance_path(instance.id) , {:style=>'color:#4bed10;', :class => "css_class"} %></5h></div>
+            <% end %>
+          <%else %>
+            <div ><h5><%=link_to instance.materia.resume_instance + I18n.l(instance.at_time, format:'%I:%M %p'), materia_instance_path(instance.id), {:style=>'color:#f01616;', :class => "css_class"} %></h5></div>
+          <%end%>
+        <%end%>
+      <%end%>
+    </div>
+  </h4>
+</div>
+
+
+
+<script>
+$(document).ready(
+         function() {
+          setInterval(function() {
+            $('#this').load(document.URL + ' #this');
+        }, 30000);
+    })
+</script>

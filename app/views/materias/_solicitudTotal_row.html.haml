@@ -1,0 +1,13 @@
+.totals{:id=>"totals"}
+  .col-xs-11.col-xs-offset-1
+    %span.itemName # Horas:
+    %span.price.pull-right= @order.reload.hours
+  .col-xs-11.col-xs-offset-1
+    %span.itemName Subtotal:
+    %span.price.pull-right= number_to_currency(@order.reload.subtotal_sale_price,:unit=> '$', :precision => 0, :format => '%u%n')
+  .col-xs-11.col-xs-offset-1
+    %span.itemName Descuento:
+    %span.price.pull-right= number_to_currency(@order.reload.discount,:unit=> '$', :precision => 0, :format => '%u%n')
+  .col-xs-11.col-xs-offset-1
+    %span.itemName Total:
+    %span.price.pull-right= number_to_currency(@order.reload.sale_price,:unit=> '$', :precision => 0, :format => '%u%n')

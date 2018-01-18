@@ -1,0 +1,9 @@
+.container
+	.page-header	
+		%h3 Nueva solicitud
+		%h4{align:'left'}= @student.name 
+ 	
+	%p#notice= notice
+	
+	.row-fluid
+		= render 'form'

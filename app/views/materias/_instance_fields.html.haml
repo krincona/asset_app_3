@@ -1,0 +1,22 @@
+.nested-fields
+  .row
+    .pull-right
+      = link_to_remove_association "Borrar fecha", f
+
+  .form-group.row
+    .col-xs-4
+      %label.col-form-label{for:"date-input"} Fecha
+      %label#toggle-div{style:"display:none"} de inicio
+
+    .col-xs-8
+      =f.input_field :at_date, as: :string, value: f.object.at_date || Date.today + 2.days, type:"date", id:"date-input", required: true, class:"form-control select-date",:style => "width:150px"
+  .form-group.row
+    %label.col-xs-4.col-form-label{for:"time-input"} Hora
+    .col-xs-8.select-time-wrapper
+      = f.time_select :at_time, {as: :time, :default => Time.now.change(:hour => 16),type:"text", id:"time-input", required: true, start_hour: 8, end_hour: 19, minute_step: 15, ampm: true, :time_separator => ""}, {:style => "width:70px",class:"form-control select-time"}
+  .form-group.row
+    %label.col-xs-4.col-form-label{for:"duration-input"} Duración
+    .col-xs-4
+      .input-group
+        =f.input_field :duration, value: f.object.duration || 1.5, type:"number", min:1.5, max:3.0, step:0.5, id:"duration-input", required: true, :style => "width:70px", class:"form-control"
+    %label.col-xs-4.col-form-label{for:"duration-input"} horas

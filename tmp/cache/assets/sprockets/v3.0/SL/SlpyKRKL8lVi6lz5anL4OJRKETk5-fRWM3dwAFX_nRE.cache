@@ -1,0 +1,16 @@
+I"](function() {
+  $(document).ready(function() {
+    return jQuery(".best_in_place").best_in_place();
+  });
+
+  $(function() {
+    var sPage, sPath;
+    sPath = window.location.pathname;
+    sPage = sPath.substring(sPath.lastIndexOf('/') + 1);
+    if (sPage === 'admin') {
+      setTimeout('location.reload(true);', 30000);
+    }
+  });
+
+}).call(this);
+:ET

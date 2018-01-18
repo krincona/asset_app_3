@@ -1,0 +1,29 @@
+.modal-dialog
+  .modal-content
+    / Modal Header
+    .modal-header
+      %button.close{"data-dismiss" => "modal", :type => "button"}
+        %span{"aria-hidden" => "true"} ×
+        %span.sr-only Cerrar
+      %h4#myModalLabel.modal-title
+        = "Perfil de #{student.name}"
+      .modal-body
+        .row-fluid
+        %table.table.table-hover
+          %tr
+            %th Colegio
+            %td= student.school
+          %tr
+            %th Curso
+            %td= student.grade
+          %tr
+            %th Email
+            %td= student.email
+          %tr
+            %th Celular
+            %td= student.phone
+      .modal-footer
+        .actions
+          %button.btn.btn-default.btn-block{"data-dismiss" => "modal", :type => "button"}
+            Cerrar
+          

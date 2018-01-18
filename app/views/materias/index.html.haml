@@ -1,0 +1,111 @@
+= provide(:title, 'Estudiantes| Solicitud')
+= render "dialog"
+.container
+  .row
+    .col-xs-8.col-sm-8.col-md-8.col-lg-8{"style"=>"float: right;"}
+      .info.text-center
+        .totals.price
+          %h6 Revisa tu carrito
+    .col-xs-8.col-sm-4.col-md-4.col-lg-4
+      .info.text-center
+        .totals.price
+          %h3= "Solicitud de #{@order.student.shortname}"
+
+    .col-xs-4.col-sm-4.col-md-4.col-lg-4{"style"=>"float: right;"}
+      
+      .col-xs-12.col-sm-12.col-md-12.col-lg-12
+        .box-icon-cart{"style"=>"float: right;"}
+          %a{"aria-controls" => "collapseCart", "aria-expanded" => "false", "data-toggle" => "collapse", :href => "#collapseCart"}
+            .fa.fa-3x.fa-shopping-cart
+      .col-xs-12.col-sm-12.col-md-12.col-lg-12
+        .info.text-center
+          .totals.price
+            = render "materias/cartTotal_row", order: @order
+  #collapseCart.collapse
+    .row
+      .panel-group{:id=>"accordion"}
+        #materias
+          - @materias.each do |materia|
+            = render "materias/materia_row", materia: materia
+
+    %br/
+    .row
+      = render "materias/solicitudTotal_row", order: @order
+      .totals
+        %span.accept
+          %a.btn.btn-asset-purple.text-center{:href=> order_path(@order)} Finalizar solicitud
+      
+
+
+  .row
+    .col-xs-12.col-sm-4.col-md-4.col-lg-4
+      .box
+        .box-icon
+          %span.fa.fa-4x.fa-calculator
+        .info.text-center
+          %h5 Matemáticas
+          = link_to "Solicitar", new_order_materia_path(name:"Matemáticas"),{:remote => true, class: "btn btn-asset-purple btn-lg", :type=>"button",:style=>"white-space:normal"}
+    .col-xs-12.col-sm-4.col-md-4.col-lg-4
+      .box
+        .box-icon
+          %span.fa.fa-4x.fa-rocket
+        .info.text-center
+          %h5 Física
+          = link_to "Solicitar", new_order_materia_path(name:"Física"),{:remote => true, class: "btn btn-asset-purple btn-lg", :type=>"button",:style=>"white-space:normal"}
+    .col-xs-12.col-sm-4.col-md-4.col-lg-4
+      .box
+        .box-icon
+          %span.fa.fa-4x.fa-thermometer-quarter
+        .info.text-center
+          %h5 Quimica
+          = link_to "Solicitar", new_order_materia_path(name:"Química"),{:remote => true, class: "btn btn-asset-purple btn-lg", :type=>"button",:style=>"white-space:normal"}
+    .col-xs-12.col-sm-4.col-md-4.col-lg-4
+      .box
+        .box-icon
+          %span.fa.fa-4x.fa-envira
+        .info.text-center
+          %h5 Biologia
+          = link_to "Solicitar", new_order_materia_path(name:"Biología"),{:remote => true, class: "btn btn-asset-purple btn-lg", :type=>"button",:style=>"white-space:normal"}
+    .col-xs-12.col-sm-4.col-md-4.col-lg-4
+      .box
+        .box-icon
+          %span.fa.fa-4x.fa-commenting-o
+        .info.text-center
+          %h5 Ingles
+          = link_to "Solicitar", new_order_materia_path(name:"Inglés"),{:remote => true, class: "btn btn-asset-purple btn-lg", :type=>"button",:style=>"white-space:normal"}
+    .col-xs-12.col-sm-4.col-md-4.col-lg-4
+      .box
+        .box-icon
+          %span.fa.fa-4x.fa-fort-awesome
+        .info.text-center
+          %h5 Sociales
+          = link_to "Solicitar", new_order_materia_path(name:"Sociales"),{:remote => true, class: "btn btn-asset-purple btn-lg", :type=>"button",:style=>"white-space:normal"}
+    
+    .col-xs-12.col-sm-4.col-md-4.col-lg-4
+      .box
+        .box-icon
+          %span.fa.fa-4x.fa-comments
+        .info.text-center
+          %h5 Español
+          = link_to "Solicitar", new_order_materia_path(name:"Español"),{:remote => true, class: "btn btn-asset-purple btn-lg", :type=>"button",:style=>"white-space:normal"}
+    .col-xs-12.col-sm-4.col-md-4.col-lg-4
+      .box
+        .box-icon
+          %span.fa.fa-4x.fa-globe
+        .info.text-center
+          %h5 Francés
+          = link_to "Solicitar", new_order_materia_path(name:"Francés"),{:remote => true, class: "btn btn-asset-purple btn-lg", :type=>"button",:style=>"white-space:normal"}
+    .col-xs-12.col-sm-4.col-md-4.col-lg-4
+      .box
+        .box-icon
+          %span.fa.fa-4x.fa-pie-chart
+        .info.text-center
+          %h5 Estadistica
+          = link_to "Solicitar", new_order_materia_path(name:"Estadística"),{:remote => true, class: "btn btn-asset-purple btn-lg", :type=>"button",:style=>"white-space:normal"}
+    .col-xs-12.col-sm-4.col-md-4.col-lg-4
+      .box
+        .box-icon
+          %span.fa.fa-4x.fa-sticky-note-o
+        .info.text-center
+          %h5 Tareas
+          = link_to "Solicitar", new_order_materia_path(name:"Tareas"),{:remote => true, class: "btn btn-asset-purple btn-lg", :type=>"button",:style=>"white-space:normal"}                 

@@ -1,0 +1,21 @@
+.row
+    .col-xs-6
+        %h5="Incia #{@horario.from}"
+    .col-xs-6
+        %h5="Termina #{@horario.to}"
+%table.table.table-hover
+    %thead
+        %tr
+            %th Materia
+            %th Dias
+            %th Hora
+            %th Duracion
+            %th Tutor			
+    %tbody
+    - @horario.materias.each do |m|
+        %tr
+            %td= m.name
+            %td= m.wdays_to_string
+            %td= I18n.l m.at_time, format: " %I:%M %p"
+            %td= m.duration
+            %td= !m.tutor.nil? ? (link_to m.tutor.name.split.map(&:capitalize).join(' '), profile_tutor_path(m.tutor)) : "Pendiente"

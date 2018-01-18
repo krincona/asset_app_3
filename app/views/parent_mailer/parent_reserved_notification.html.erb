@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>Correo de Reserva a Padres</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body style="margin: 0; padding: 0;">
+ <table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tr>
+   <td>
+     <table align="center" border="0" cellpadding="0" cellspacing="0" width="700" height="200" style="border-collapse: collapse;">
+       <tr>
+          <td align="center" bgcolor="#ffffff" style="padding: 40px 0 30px 0;">
+               <%= email_image_tag("ASSET-TUTOTRES-LOGO-FINAL.jpg", size:"240x168") %>
+           </td>
+       </tr>
+       <tr>
+         <td align="center" bgcolor="#ffffff" style="padding: 20px 0 15px 0;">
+           <h3 style="color:#72277C">GRACIAS POR PREFERIRNOS</h3>
+         </td>
+       </tr>
+       <tr>
+         <td align="center" bgcolor="#ffffff" style="padding: 20px 0 15px 0;">
+           <h2 style="color:#72277C">¡Nuevo! </h2>
+         </td>
+       </tr>
+        <tr>
+         <td align="justify" bgcolor="#ffffff" style="padding: 20px 0 15px 0;">
+           <h3 style="color:#72277C"> 
+             En <a href="www.asset-tutores.com"> WWW.ASSET-TUTORES.COM </a> ingresa por el boton Pedir Tutorias, y con tu email y cédula podrás: 
+             <ul>
+               <li> Ver calendario de tutorias</li>
+               <li> Ver el perfil de tu tutor </li>
+               <li> Pedir tutorias </li>
+             </ul>
+           </h3>
+         </td>
+       </tr>
+         <td bgcolor="#ffffff" style="padding: 40px 30px 5px 30px; ">
+           <table border="0" cellpadding="0" cellspacing="0" width="100%">
+             <tr>
+               <td>
+                 <h3>¡La orden de tutorías se encuentra en reserva !</h3>
+               </td>
+             </tr>
+             <tr>
+               <td style="padding: 20px 0 5px 0;">
+                 Hola <%= @greeting%>. Nuestro equipo de coordinacion ha
+                 reservado las siguientes sesiones de tutoría:
+                 <br /><br />
+                 <%@order.materias.each do |materia|%>
+                  <h5><%= materia.name %></h5>
+
+                  <table  align="center" width="100%">
+                   <thead >
+                     <tr>
+                       <th>Tutor</th>
+                       <th>Fecha</th>
+                       <th>Hora</th>
+                       <th>Duracion</th>
+                     </tr>
+                   </thead>
+                   <%materia.materia_instances.each do |instance|%>
+                     <tr>
+                       <td align="center"><%= instance.tutor.name%></td>
+                       <td align="center"><%= I18n.l instance.at_date,
+                         format: "%a %B %d, %Y"%></td>
+                       <td align="center"><%= I18n.l instance.at_time,
+                         format: "%I:%M %p"%></td>
+                       <td align="center"><%= instance.duration%></td>
+                     </tr>
+                   <%end%>
+                  </table>
+                 <%end%>
+               </td>
+             </tr>
+             <tr>
+               <td>
+                 <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                   <tr>
+                     <td width="260" valign="top">
+                       <h4>Siguiente paso:</h4>
+                       <p>Para confirmar tus sesiones de tutoría en los horarios
+                       listados debes realizar el pago antes de las 6:00 p.m.
+                       del <%= I18n.l @order.payment_dateline, format: "%a %B %d, %Y"%>.
+                       Si el pago se realiza después de esta fecha/hora, se modificarán
+                       las sesiones de tutoría para otras fechas. No aplican reembolsos.   </p>
+                       <h4>Datos de Pago:</h4>
+                       <p>Total de Horas: <%= @order.hours%> </p>
+                       <p>Subtotal Tutorias: <%=number_to_currency(@order.subtotal_sale_price ,:unit => '$', :precision => 0, :format => '%u%n')%></p>
+                       <p>Subsidio: <%=number_to_currency(@order.subsidy ,:unit => '$', :precision => 0, :format => '%u%n')%></p>
+                       <% if @order.discount > 0 %>
+                        <p>Descuento: <%=number_to_currency(@order.discount ,:unit => '$', :precision => 0, :format => '%u%n')%></p>
+                       <%end%> 
+                       <p>Valor a Pagar: <%= number_to_currency(@order.sale_price ,:unit => '$', :precision => 0, :format => '%u%n')%>  </p>
+                       <p>Numero de Referencia: <%= @order.serial %> </p>
+                     </td>
+                     <td style="font-size: 0; line-height: 0;" width="20">
+                       &nbsp;
+                     </td>
+                     <td width="260" valign="top">
+                       <h4>Medios de Pago:</h4>
+                       <h4> Transferencia o consignación en Bancolombia, o en cajas de Éxito, Olímpica y Carulla</h4>
+                       
+                       <p>  Cuenta de ahorros Bancolombia <br>#04242-891738 a nombre de Juan Pablo Rincon (c.c. 80089343). <br>
+                       <em>Importante</em>: por favor enviar foto del soporte de pago. Para consignaciones fuera de Bogotá adicionar $10,000.</p>
+                       <p>Cuando se solicita el servicio se aceptan los
+                       <a href="https://docs.google.com/document/d/1wq9za0ZTi89vodkI2HaqueTfdLhUS24DDX6iJgvJD6Y/pub">Términos y Condiciones</a></p>
+                     </td>
+                   </tr>
+                 </table>
+               </td>
+             </tr>
+           </table>
+         </td>
+       </tr>
+       <tr>
+         <td align="center" bgcolor="#ffffff" >
+           <h3 style="color:#BDD64E">ESPERAMOS PODER COLABORARTE NUEVAMENTE</h3>
+         </td>
+       </tr>
+
+       <tr>
+         <td bgcolor="#BDD64E">
+           <table border="0" cellpadding="0" cellspacing="0" width="100%">
+             <tr>
+               <td align="center">
+                 <h5>TUTORES CON EL MAS ALTO NIVEL ACADÉMICO<br>
+                 <a href=https://www.asset-tutores.com>www.asset-tutores.com</a><br>
+                 Telefonos: 8032918  -  318 3467855   -  301 2857504<br>
+                 Horario de atención: Lunes a viernes 8:30 am a 12:30m – 2:00 pm a 6:00  pm</h5>
+               </td>
+             </tr>
+           </table>
+         </td>
+       </tr>
+    </table>
+   </td>
+  </tr>
+ </table>
+</body
+</html>

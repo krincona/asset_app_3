@@ -1,0 +1,26 @@
+.modal-dialog
+  .modal-content
+    .modal-header
+      %button.close{"data-dismiss" => "modal", :type => "button"}
+        %span{"aria-hidden" => "true"} ×
+        %span.sr-only Close
+      %h4#myModalLabel.modal-title
+        Calendario
+    .modal-body
+      - if !mytutoria_instances.nil?
+        %h4
+          = month_calendar table: {class: "table table-bordered"}, tr: {class: "calendar-row"}, td:{class: "day"}, events: mytutoria_instances, previous_link: events_ajax_previous_link, next_link: events_ajax_next_link  do |date,instances|
+            = date.day
+            -instances.each do |instance|
+              - if instance.status == "confirmed"
+                - if instance.at_date < Date.today
+                  %div
+                    %h5= link_to instance.header, tutoria_instance_path(instance.id), {:style => 'color:#959e91;',:class => "css_class"}
+                - else
+                  %div
+                    %h5= link_to instance.header, tutoria_instance_path(instance.id), {:style => 'color:#4bed10;',:class => "css_class"}
+              - elsif instance.status == "reserved"
+                %div
+                  %h5= link_to instance.header, tutoria_instance_path(instance.id), {:style=>'color:#f01616;', :class => "css_class"}
+      - else
+        %h3 No se encontraron tutorias programadas

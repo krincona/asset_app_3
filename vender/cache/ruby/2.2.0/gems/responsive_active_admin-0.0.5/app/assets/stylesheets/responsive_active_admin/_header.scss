@@ -1,0 +1,47 @@
+#header {
+  @include responsive {
+    box-sizing: border-box;
+
+    display: block;
+    height:  auto;
+
+    padding: 10px 22px;
+  }
+
+  h1 {
+    @include responsive {
+      padding-left: 10px;
+    }
+  }
+
+  ul.tabs {
+    @include responsive {
+      display: block;
+    }
+
+    & > li {
+      @include responsive {
+        display: block;
+      }
+    }
+  }
+
+  #utility_nav {
+    @include responsive {
+      display: block;
+
+      margin-top:  5px;
+      padding-top: 5px;
+
+      border-top: #444 1px solid;
+
+      text-align: left;
+    }
+
+    li {
+      @include responsive {
+        display: block;
+      }
+    }
+  }
+}

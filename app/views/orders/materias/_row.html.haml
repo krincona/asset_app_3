@@ -1,0 +1,10 @@
+.panel.panel-default{:id=>"#{materia.id}"}
+  .panel-heading.text-left
+    %button.btn.btn-asset.btn-lg.bt-block.accordion-toggle{"data-toggle" => "collapse", "data-parent" => "#accordion", :href=>"#collapse_materia"}
+      %i.fa.fa-pencil
+      %span
+      = "#{materia.name} + TOTAL "
+  .panel-collapse.collapse{:id=>"collapse_materia"}
+    .panel-body.text-left
+      %p Aqui va el resumen financiero
+      = #link_to "Editar", edit_materia_path(materia), remote: true

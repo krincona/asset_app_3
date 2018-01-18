@@ -1,0 +1,6 @@
+// Add the dialog title
+$('#dialog h4').html("#{j @order.student.name}");
+// Render the new form
+$('.modal-body').html("#{ j render(partial: 'materias/form')} ");
+// Show the dynamic dialog
+$('#dialog').modal("show");

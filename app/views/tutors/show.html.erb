@@ -1,0 +1,9 @@
+<%= provide(:title, 'Tutor | Calendario')%>
+
+<% flash.each do |name, msg| %>
+<%= content_tag :div, msg, class: "alert alert-info" %>
+<% end %>
+
+<div class="row-fluid">
+  <div><%= render partial: 'tutors/calendar'%></div>
+</div>

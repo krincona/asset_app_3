@@ -1,0 +1,23 @@
+.modal-dialog{role:"document"}
+  .modal-content
+    .modal-header#myModalLabel
+      %button.close{"data-dismiss" => "modal", :type => "button"}
+        %span{"aria-hidden" => "true"} ×
+        %span.sr-only Close
+      .modal-title
+        .col-xs-5.col-offset-1
+          = instance.at_date.day
+        .col-xs-5.col-offset-1
+          = instance.materia.name
+    .modal-body
+      .col-xs-5.col-offset-1
+        %h5="Hora: #{I18n.l instance.at_time, format: '%I:%M %p'} "
+        %h5="Temas: #{instance.materia.topic} "
+      .col-xs-5.col-offset-1
+        -if !instance.materia.tutor_id.nil?
+          %h6="Tutor: #{instance.materia.tutor.name }"
+          %h6="Universidad: #{instance.materia.tutor.university}"
+          %h6="Carrera: #{instance.materia.tutor.major}"
+    .modal-footer
+
+

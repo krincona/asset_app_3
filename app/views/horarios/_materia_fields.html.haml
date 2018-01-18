@@ -1,0 +1,21 @@
+.panel-body	
+    .nested-fields
+        = f.input :name, label: false, prompt:"Asignatura", as: :select, collection: TutoriaInstance::SUBJECTS, required: true
+        .form-group
+            .checkbox
+                %label
+                    %input.repeat_check{type: 'checkbox', checked: 'checked'}
+                    Clase semanal
+        = f.input :wdays, label: false, input_html:{class: 'weekday_input', multiple: 'true'}, prompt:"Escoje el dia", as: :select, collection: I18n.t(:"date.day_names")
+        .date_input{style: 'display: none'}
+            = f.input :at_date, as: :date_picker,label: false, placeholder:"Escoje la fecha", :input_html => {:type=>"date"}
+        = f.input :at_time, as: :time_picker, placeholder:"Escoje la hora",label:false, :input_html=>{:class=>"form-control", :type=>"time"}
+        = f.input :duration, as: :decimal, label: false,:input_html => {:min => 1.5,:max => 3.0, :step=>0.5, :value=> 2.0}
+        = f.input :topic, as: :text, label: false, placeholder:"Temas/Observaciones", :input_html => {size: '50px'}
+        .remove_student_link
+            = link_to_remove_association "Borrar Materia", f
+
+
+:javascript
+    add_toggle();
+            

@@ -1,0 +1,5 @@
+:javascript
+  $('= j render "materias/form", title: "Nueva Materia" ').on('hidden.bs.modal', function (e) {
+    $(this).remove();
+    $('.modal-backdrop').remove();
+  }).modal();

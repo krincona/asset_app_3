@@ -1,0 +1,5 @@
+$('#materia#{@materia.id}').fadeOut();
+
+$('#totals').replaceWith("#{ j render "materias/solicitudTotal_row"}");
+
+$('#cartTotals').replaceWith("#{ j render "materias/cartTotal_row"}");

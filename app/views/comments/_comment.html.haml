@@ -1,0 +1,7 @@
+%li.media	
+	%a.pull-left
+		%img.media-object.img-circle{src:'/images/user.png'}
+	.media-body
+		.media-heading
+			%h5= I18n.l comment.created_at,format: :long
+		%p= 		comment.body 

@@ -1,0 +1,15 @@
+.border-form-div
+  .panel.panel-default
+    .panel-heading.text-center
+      %h3 Hola, bienvenid@ a ASSET Tutores
+    .panel-body
+      = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+        .form-group
+          = f.email_field :email, :placeholder=>"Aqui tu correo"
+        %div
+          = f.password_field :password, :placeholder=>"Aqui tu contraseña"
+        %div
+          = f.submit t('.sign_in', :default => "Sign in"), :class=> "btn-asset btn-lg btn-block"
+      %br/
+      %div    
+        = render "devise/shared/links"

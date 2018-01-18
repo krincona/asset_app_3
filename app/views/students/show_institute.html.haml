@@ -1,0 +1,67 @@
+%p#notice= notice
+
+.page-header
+	%h3{align:'left'}	
+		= @student.name
+
+.row-fluid
+	.col-md-4
+		.panel.panel-default
+			.panel-heading{align:'left'}					
+				%h4 Informacion del Estudiante
+			.panel-body
+				%table.table.table-hover
+				
+					%tr
+						%th Curso
+						%td= @student.grade
+					%tr
+						%th Nombre Papá/Mamá
+						%td= @student.parent.name.split.map(&:capitalize).join(' ')
+					%tr
+						%th Telefono Papá/Mamá
+						%td= @student.parent.phone_alt1
+					%tr
+						%th Email Papá/Mamá
+						%td= @student.parent.email
+	.col-md-8
+		.panel.panel-default
+			.panel-heading{align:'left'}
+				%h4 Resumen de Tutorias
+			.panel-body
+				%table.table.table-hover
+					%thead
+						%tr
+							%th Materia
+							%th Dias
+							%th Hora
+							%th Duracion
+							%th Tutor			
+					%tbody
+						- @student.horario.materias.each do |m|
+							%tr
+								%td= m.name
+								%td= m.wdays_to_string
+								%td= I18n.l m.at_time, format: " %I:%M %p"
+								%td= m.duration
+								%td= !m.tutor.nil? ? (link_to m.tutor.name.split.map(&:capitalize).join(' '), profile_tutor_path(m.tutor)) : "Pendiente"
+%br
+.row-fluid
+	.col-md-12
+		.panel.panel-default
+			.panel-heading{align:'left'}
+				%h4 Comentarios
+			.panel-body
+				.col-md-8
+					%u1.media-list
+						= render(partial: 'comments/comment', collection: @student.comments)
+				%br
+				.col-md-4
+					=form_for [@student, Comment.new] do |f|
+						=f.text_area :body, placeholder: "Agrega un comentario"
+						=f.submit "Comentar"
+
+
+
+
+

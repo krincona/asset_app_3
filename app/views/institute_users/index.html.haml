@@ -1,0 +1,19 @@
+%h1 Listing institute_users
+
+%table
+  %thead
+    %tr
+      %th
+      %th
+      %th
+
+  %tbody
+    - @institute_users.each do |institute_user|
+      %tr
+        %td= link_to 'Show', institute_user
+        %td= link_to 'Edit', edit_institute_user_path(institute_user)
+        %td= link_to 'Destroy', institute_user, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Institute user', new_institute_user_path

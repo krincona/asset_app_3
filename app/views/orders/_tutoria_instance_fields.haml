@@ -1,0 +1,10 @@
+.nested-fields
+	= f.label 'Materia'
+	= f.input :subject, as: :select, label:false,collection: TutoriaInstance::SUBJECTS, required: true
+	= f.label 'Numero de Estudiantes'
+	= f.input :student_number, label:false, as: :integer, :input_html => {:min => 1, :max => 5, :step=>1}
+	= f.label 'Duración'
+	= f.input :duration, label:false ,as: :float, :input_html => {:min => 1.5, :max => 3.0, :step=>0.5}
+	= f.label 'Temas / Observaciones'
+	= f.input :topic, label:false, as: :text, :input_html => {size: '50px'}
+	= link_to_remove_association "Borrar Materia", f  

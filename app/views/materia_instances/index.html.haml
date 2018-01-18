@@ -1,0 +1,19 @@
+%h1 Listing materia_instances
+
+%table
+  %thead
+    %tr
+      %th
+      %th
+      %th
+
+  %tbody
+    - @materia_instances.each do |materia_instance|
+      %tr
+        %td= link_to 'Show', materia_instance
+        %td= link_to 'Edit', edit_materia_instance_path(materia_instance)
+        %td= link_to 'Destroy', materia_instance, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Materia instance', new_materia_instance_path

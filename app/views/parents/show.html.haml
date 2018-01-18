@@ -1,0 +1,29 @@
+= provide(:title, 'Papas| Incio')
+
+.container
+  .row
+    %button.btn.btn-asset-purple{"data-target" => "#free_tutorias", "data-toggle" => "modal",:type => "button", "style"=>"float: right;"} !Tutorias gratis!
+
+  .row
+    - @students.each do |student|
+      .col-xs-12.col-sm-6.col-md-6.col-lg-6
+        .box
+          .box-icon
+            %span.fa.fa-4x.fa-user
+          .info.text-center
+            %h5= student.name
+            = link_to "Solicitar", orders_path(student_id: student.id), {:method=> :post,class:"btn btn-asset-purple btn-lg",:type => "button",params:{student_id: student.id} }
+
+    
+- @parent.students.each do |student|
+  .modal.fade{:id=>"show#{student.id}","aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+    = render "students/student", student: student
+
+.modal.fade{:id=>"showParent","aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  = render "profile"
+
+.modal.fade{:id=>"calendar","aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  = render "calendar", students: @students
+
+.modal.fade{:id=>"free_tutorias","aria-hidden" => "false", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  = render "free_tutorias"

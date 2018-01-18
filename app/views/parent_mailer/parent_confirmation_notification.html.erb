@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>Correo de Confirmación a Padres</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body style="margin: 0; padding: 0;">
+ <table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tr>
+   <td>
+     <table align="center" border="0" cellpadding="0" cellspacing="0" width="700" height="350" style="border-collapse: collapse;">
+       <tr>
+         <td align="center" bgcolor="#ffffff" style="padding: 40px 0 30px 0;">
+           <%= email_image_tag("ASSET-TUTOTRES-LOGO-FINAL.jpg", size:"240x168") %>
+         </td>
+       </tr>
+       <tr>
+         <td align="center" bgcolor="#ffffff" style="padding: 20px 0 15px 0;">
+           <h3 style="color:#72277C">GRACIAS POR PREFERIRNOS</h3>
+         </td>
+       </tr>
+       <tr>
+         <td align="center" bgcolor="#ffffff" style="padding: 20px 0 15px 0;">
+           <h2 style="color:#72277C">¡Nuevo! </h2>
+         </td>
+       </tr>
+       <tr>
+         <td align="justify" bgcolor="#ffffff" style="padding: 20px 0 15px 0;">
+           <h3 style="color:#72277C"> 
+             En <a href="www.asset-tutores.com"> WWW.ASSET-TUTORES.COM </a> ingresa por el boton Pedir Tutorias, y con tu email y cédula podrás: 
+             <ul>
+               <li> Ver calendario de tutorias</li>
+               <li> Ver el perfil de tu tutor </li>
+               <li> Pedir tutorias </li>
+             </ul>
+           </h3>
+         </td>
+       </tr>
+       <tr>
+         <td bgcolor="#ffffff" style="padding: 40px 30px 5px 30px; ">
+           <table border="0" cellpadding="0" cellspacing="0" width="100%">
+             <tr>
+               <td>
+                 <h3>¡La orden de tutorias se encuentra confirmada !</h3>
+               </td>
+             </tr>
+             <tr>
+               <td style="padding: 20px 0 5px 0;">
+                 Hola <%= @greeting%>. Tu pago ha sido exitoso.
+                 Las siguientes tutorías han quedado confirmadas:
+                 <br /><br />
+                  <%@order.materias.each do |materia|%>
+                  <h5><%= materia.name %></h5>
+
+                  <table  align="center" width="100%">
+                   <thead >
+                     <tr>
+                       <th>Tutor</th>
+                       <th>Fecha</th>
+                       <th>Hora</th>
+                       <th>Duracion</th>
+                     </tr>
+                   </thead>
+                   <%materia.materia_instances.each do |instance|%>
+                     <tr>
+                       <td align="center"><%= instance.tutor.name%></td>
+                       <td align="center"><%= I18n.l instance.at_date,
+                         format: "%a %B %d, %Y"%></td>
+                       <td align="center"><%= I18n.l instance.at_time,
+                         format: "%I:%M %p"%></td>
+                       <td align="center"><%= instance.duration%></td>
+                     </tr>
+                   <%end%>
+
+
+                  </table>
+                 <%end%>
+                 <p>Importante: cuando se solicita el servicio se aceptan los
+                 <a href="https://docs.google.com/document/d/1wq9za0ZTi89vodkI2HaqueTfdLhUS24DDX6iJgvJD6Y/pub">Terminos y Condiciones</a></p>
+               </td>               
+             </tr>
+             <tr>
+              <td>
+                <strong>Reprogramaciones</strong>: Se deben solicitar con al menos un día hábil de anticipación. No son aceptadas el mismo día. Estas tutorías se pueden reprogramar máximo hasta el <%= I18n.l @order.re_dateline,format: "%a %B %d, %Y"%>. Después de esta fecha caducan y no podrán ser reprogramadas.
+              </td>
+             
+             </tr>
+           </table>
+         </td>
+       </tr>
+       <tr>
+         <td align="center" bgcolor="#ffffff">
+           <h3 style="color:#BDD64E">ESPERAMOS PODER COLABORARTE NUEVAMENTE</h3>
+         </td>
+       </tr>
+       <tr>
+         <td bgcolor="#BDD64E">
+           <table border="0" cellpadding="0" cellspacing="0" width="100%">
+             <tr>
+               <td align="center">
+                 <h5>TUTORES CON EL MAS ALTO NIVEL ACADÉMICO<br>
+                 <a href=https://www.asset-tutores.com>www.asset-tutores.com</a><br>
+                 Telefonos: 8032918  -  318 3467855   -  301 2857504<br>
+                 Horario de atención: Lunes a viernes 8:30 am a 12:30m – 2:00 pm a 6:00  pm</h5>
+               </td>
+             </tr>
+           </table>
+         </td>
+       </tr>
+    </table>
+   </td>
+  </tr>
+ </table>
+</body
+</html>

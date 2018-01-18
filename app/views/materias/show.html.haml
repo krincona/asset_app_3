@@ -1,0 +1,6 @@
+%h1 Show Materia
+
+= @materia.name
+
+= link_to 'Back', order_materias_path(@materia.order)
+= link_to 'Edit', edit_order_materia_path(@materia.order,@materia)

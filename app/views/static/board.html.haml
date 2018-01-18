@@ -1,0 +1,28 @@
+= provide(:title, 'Tutor | Busqueda de Tutorias')
+
+- flash.each do |key, value|
+  %div{:class => "alert alert-#{key}"}= value
+
+
+.container
+  .page-header
+    .row
+      .pull-right
+        = search_form_for @query, url: static_board_path do |q|
+          = q.search_field :name_cont, placeholder: "Materia"
+          = q.submit "Buscar", {class: "btn btn-asset-purple"}
+  %br/
+  .row
+    .panel-group{:id=>"accordion"}
+      - @materias_publicables.each do |materia|
+        = render "materias/materia_row_tutores", materia: materia
+
+
+
+:javascript
+  $(document).ready(
+           function() {
+            setInterval(function() {
+              $('#accordion').load(document.URL + ' #accordion');
+          }, 60000);
+      })

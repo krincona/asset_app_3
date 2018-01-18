@@ -1,0 +1,46 @@
+:javascript
+  function add_toggle(){console.log("click!");
+    $(".repeat_check").change(function(){
+      console.log($(this).is(':checked'));
+      if ($(this).is(':checked')) {
+        $(this).closest(".nested-fields").find(".weekday_input").show();
+        $(this).closest(".nested-fields").find(".date_input").hide().val("");
+      }
+      else {
+        $(this).closest(".nested-fields").find(".date_input").show();
+        $(this).closest(".nested-fields").find(".weekday_input").hide().val("");
+      }
+    });
+  }
+  
+= simple_form_for(@horario) do |f|
+  = f.error_notification
+  .form-inputs#horario-form
+    .panel.panel-default
+      .panel-heading
+        %h3= "Materias"
+      .panel-body
+        = f.simple_fields_for :materias do |materia|
+          = render 'materia_fields', f: materia
+        %button.pull-right.btn-primary.links.add_subject{:type=>"button"}
+          = link_to_add_association 'Agregar Materia', f, :materias
+    .actions
+      = f.button :submit, "Actualizar Orden"
+
+
+:javascript
+  $(document).ready(function(){
+      $(".remove_student_link").hide();
+      $(".repeat_check").change(function(){
+        console.log($(this).is(':checked'));
+        if ($(this).is(':checked')) {
+          $(this).closest(".nested-fields").find(".weekday_input").show();
+          $(this).closest(".nested-fields").find(".date_input").hide().val("");
+        }
+        else {
+          $(this).closest(".nested-fields").find(".date_input").show();
+          $(this).closest(".nested-fields").find(".weekday_input").hide().val("");
+        }
+      });
+      
+  });

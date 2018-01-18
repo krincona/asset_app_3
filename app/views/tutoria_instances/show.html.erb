@@ -1,0 +1,16 @@
+<%= provide(:title, 'Tutoria | Detalle')%>
+
+<% flash.each do |name, msg| %>
+<%= content_tag :div, msg, class: "alert alert-info" %>
+<% end %>
+
+<h1>Detalle</h1>
+
+<p>Orden:    <%=@tutoria.order.serial%></p>
+<p>Alumno:    <%=@tutoria.student.name%></p>
+<p>Acudiente: <%=@tutoria.student.parent.name%></p>
+<p>Direccion: <%=@tutoria.student.parent.address%></p>
+<p>Materia:   <%=@tutoria.subject%></p>
+<p>Horario:   <%=@tutoria.tutoria.schedule%></p>
+<p>Duración:  <%=@tutoria.duration%> horas</p>
+<p>Temas: <%=@tutoria.topic%></p>
