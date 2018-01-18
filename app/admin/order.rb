@@ -166,9 +166,7 @@ ActiveAdmin.register Order do
       
       f.input :students_number, as: :number, label: " #Estudiantes", required: true, :input_html => {:min => 1,:step=>1,:max=>4}
       f.has_many :materias, :allow_destroy => false,:heading => "Agregar Tutoria", :new_record => new_val do |materia|
-        if materia.object.new_record?
-          materia.object.materia_instances.build
-        end
+        
         materia.input :student_id, as: :hidden, :input_html=>{value:"#{object.student_id}" }
         if object.renovate
           materia.input :weekly, as: :hidden, :input_html=>{value:"#{object.renovate}" }
