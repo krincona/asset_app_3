@@ -64,8 +64,8 @@ ActiveAdmin.register Order do
       end
     end
     column "Estado", sortable: false do |o|
-      o.reload
-      case o.status
+      
+      case o.reload.status
         when 1
           status_tag o.status_name, :default
         when 3
@@ -263,7 +263,7 @@ ActiveAdmin.register Order do
               materia.order.students_number
             end
             column "Estado" do |materia|
-              materia.materia_status.name
+              materia.materia_status.name unless materia.materia_status.nil? 
             end
             column "Horas", :total_hours
             #column "Costo" do |materia|

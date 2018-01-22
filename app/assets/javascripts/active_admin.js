@@ -1,6 +1,5 @@
 //= require active_admin/base
 
-
 $(document).on('ready page:load turbolinks:load', function () {
   $('a.modalOrder').click(function(e){
     id = this.id;

@@ -14,7 +14,7 @@ class MateriaInstance < ActiveRecord::Base
   before_create  :set_materia_instance_status
 
   before_save    :set_materia_instance_status
-  after_save     :update_ids
+  after_save     :update_ids, :save_materia
   #after_destroy  :force_materia_reload
 
   
@@ -24,6 +24,10 @@ class MateriaInstance < ActiveRecord::Base
     else
       false
     end
+  end
+
+  def save_materia
+    self.materia.save!
   end
 
 

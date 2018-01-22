@@ -19,7 +19,7 @@ class Materia < ActiveRecord::Base
   scope :oferta      , -> {where materia_status_id:2}
   scope :publicables , -> {where materia_status_id:2}
 
-  #before_save :before_save_callbacks
+  before_save :before_save_callbacks
   
   #after_initialize :after_initialize_callbacks
 
@@ -27,7 +27,7 @@ class Materia < ActiveRecord::Base
   
   after_create  :check_weekly, :check_student_id
 
-  before_save :check_hours #, :check_status
+
 
   SUBJECTS=['Matematicas', 'Fisica', 'Quimica','Biologia', 'Sociales', 'Ingles','Español', 'Frances', 'Economia', 'Tareas','Excel','Contabilidad', 'Finanzas', 'Estadística', 'Filosofía'].sort
 
@@ -45,6 +45,9 @@ class Materia < ActiveRecord::Base
 
 #new stuff - Functions
 
+  def save_order
+    self.order.save!
+  end
 
   def reservada?
     if self.materia_instances.any? {|i| i.materia_instance_status_id == 1}
@@ -57,7 +60,9 @@ class Materia < ActiveRecord::Base
   def before_save_callbacks 
     self.check_status
     self.check_topics
-    #self.save_totals
+    self.save_totals
+    self.check_hours
+    self.save_order
   end
   
   def after_initialize_callbacks
@@ -111,7 +116,14 @@ class Materia < ActiveRecord::Base
   end
 
   def  check_status
-
+    paid = self.order.is_paid?
+    if self.reservada?
+      self.materia_status_id = paid ? 3 : 5
+    else
+      self.materia_status_id =  2
+    end
+  end
+=begin
     if self.materia_instances.count!=0
       case self.materia_status_id
       when 2
@@ -136,7 +148,7 @@ class Materia < ActiveRecord::Base
     else
       self.materia_status_id = 1
     end
-  end
+=end
 
   def  resume_materia
     return "(#{self.order.serial}) #{self.shortname}: #{self.place} #{self.schedule_hash_to_string}"
@@ -219,7 +231,7 @@ class Materia < ActiveRecord::Base
         end
         self.check_status
         self.save!
-        ParentMailer.parent_reserved_notification(self.order).deliver
+        #ParentMailer.parent_reserved_notification(self.order).deliver
         return true
       else
         return false
@@ -283,6 +295,21 @@ class Materia < ActiveRecord::Base
   def update_postulate(tutor_id)
     self.update_attributes({:tutor_id => tutor_id})
     self.order.tutoria_instances.each {|t| t.update_attributes({:status=>'reserved',:tutor_id => tutor_id})}
+  end
+
+  def has_tags?
+    return self.tags.empty? ? false : true
+  end
+
+  def tags
+    tags = ""
+    if self.weekly
+      tags+="#Fija Semanal  "
+    end
+    if !self.order.tarifa.nil?
+      tags+="#"+self.order.tarifa
+    end
+    return tags
   end
 
 #Tutors Account

@@ -11,17 +11,21 @@
         :href => "#collapse#{materia.id}", "white-space"=>"normal" }
           .text-left
             = materia.resume_materia
-          .text-left
-            -if materia.weekly
-              .label.label-default Fija Semanal
+           
+
 
       .col-xs-3
-        %a.button.btn.btn-asset.btn-block{:type => "button",
-        "data-confirm" => "¿Esta usted seguro?",
-        :href => "#{ tutor_postulation_materia_path(materia)}",
-        :style=>"align:center", "white-space"=>"normal"}
-          .text-center
-            %i.fa.fa-paper-plane-o.fa-2x{"aria-hidden"=>"true"}
+        .col-xs-6
+          %a.button.btn.btn-asset.btn-block{:type => "button",
+          "data-confirm" => "¿Esta usted seguro?",
+          :href => "#{ tutor_postulation_materia_path(materia)}",
+          :style=>"align:center", "white-space"=>"normal"}
+            .text-center
+              %i.fa.fa-paper-plane-o.fa-2x{"aria-hidden"=>"true"}
+      .col-xs-9.pull-left 
+        .text-left
+          -if materia.has_tags?
+            .label.label-default= materia.tags
 
 
 

@@ -36,7 +36,7 @@ class Order < ActiveRecord::Base
 
   before_save :check_status
   
-  after_initialize :after_initialize_callbacks
+  #after_initialize :after_initialize_callbacks
     
   #Functions
 
@@ -46,7 +46,7 @@ class Order < ActiveRecord::Base
 
   def before_save_callbacks
     if self.is_open?
-      #self.check_status 
+      self.check_status 
       self.calculate_price_amounts 
       self.calculate_datelines
     end 
@@ -174,14 +174,14 @@ class Order < ActiveRecord::Base
       materias_reservadas = self.materias.select {|mat| mat.reservada? }
       materias_no_reservadas = self.materias - materias_reservadas
 
-      if !materias_no_reservadas.empty?
-        materias_no_reservadas.each {|mat| mat.update_attribute :materia_status_id,2}
+      if !materias_no_reservadas.empty? 
+        #materias_no_reservadas.each {|mat| mat.update_attribute :materia_status_id,2}
+        #materias_reservadas.each    {|mat| mat.update_attribute :materia_status_id, paid ? 4 : 2 }
         new_order_status = paid ? 4 : 2
-      else
+      else  
         new_order_status = paid ? 5 : 3
+        #materias_reservadas.each {|mat| mat.update_attribute :materia_status_id, paid ? 5 : 3 }
       end
-
-      materias_reservadas.each {|mat| mat.update_attribute :materia_status_id, paid ? 5 : 3 }
 
       self.status = new_order_status
     end
