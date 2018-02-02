@@ -57,7 +57,7 @@ class MateriaInstance < ActiveRecord::Base
 
   def tutor_payable
     rate = self.materia.order.hourly_payable
-    return rate*duration
+    return rate*self.duration
   end
 
   def tutor_payable_acceptance

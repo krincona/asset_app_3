@@ -231,7 +231,7 @@ class Materia < ActiveRecord::Base
         end
         self.check_status
         self.save!
-        #ParentMailer.parent_reserved_notification(self.order).deliver
+        ParentMailer.parent_reserved_notification(self.order).deliver
         return true
       else
         return false
