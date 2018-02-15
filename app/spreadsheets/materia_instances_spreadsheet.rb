@@ -69,7 +69,7 @@ class MateriaInstancesSpreadsheet
       end
 =end
 
-      subtotal = instance.tutor_payable #instance.duration*per_hour + instance.subsidy
+      subtotal = instance.total_payable
 
       tutors[:pending]={nombre:"Sin Asignar",cedula:"N/A",ordenes:{}}
 
