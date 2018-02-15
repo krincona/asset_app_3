@@ -7,7 +7,7 @@ menu priority:2, label: 'Programacion'
 
   permit_params :tutor_id, :materia_id, :duration, :materia_instance_status_id, :at_date,:at_time, :order_id, :parent_id
 
-  index :title=> 'Sesiones Programadas',  download_links: [:xls, :csv] do
+  index :title=> 'Sesiones Programadas',  download_links: [:xls] do
     #column "Codigo", :id
     selectable_column
     column 'Orden' do |inst|
@@ -70,7 +70,7 @@ menu priority:2, label: 'Programacion'
         chain
     end
 
-=begin
+
     def index
       index! do |format|
         format.xls {
@@ -79,7 +79,6 @@ menu priority:2, label: 'Programacion'
         }
       end
     end
-=end
   end
 
 
