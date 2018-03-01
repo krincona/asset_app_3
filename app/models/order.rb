@@ -390,6 +390,13 @@ class Order < ActiveRecord::Base
       #self.status = 2
       self.created_by = "Coordinador"
     end
+    
+    case self.student.calendar_schema
+    when "S"
+      self.tarifa = "Univ"
+    when "A" || "B"
+      self.tarifa = "Colegio"
+    end
   end
 
 end

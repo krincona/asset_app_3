@@ -12,21 +12,22 @@
   
 
     = f.input_field :name, as: :hidden, :input_html=>{value:"#{@materia.name}"}, required: true
-    
-
+   
 
   .form-group.row
     %label.col-xs-4.col-form-label{for:"topic-input"} Temas
     .col-xs-8
       = f.input_field :topic, as: :text, type:"text", class:"form-control", id:"topic-input", required: true
-      
+
   .form-group.row
     %label.col-xs-4.col-form-label{for:"name-input"} #Estudiantes
     .col-xs-8
-      = f.input_field :students_number, value: f.object.students_number || 1, type: "number", min:1, max:4, step: 1, :style => "width:70px",class:"form-control", id:"students-number-input",required: true
+      = f.input_field :students_number, value: f.object.students_number || 1, type: "number", min:1, max:4, step: 1, :style => "width:70px",class:"form-control", id:"students-number-input",required: true 
+      
   
   #instances
     = f.simple_fields_for :materia_instances do |instance|
+      = instance.input_field :order_id, as: :hidden, :input_html=>{value:"#{@materia.order.id}"}, required: true
       = render 'materias/instance_fields', f: instance
     .add_subject.links.pull-right
       = link_to_add_association 'Añadir fecha', f, :materia_instances, partial: 'materias/instance_fields'
