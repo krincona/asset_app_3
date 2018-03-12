@@ -21,6 +21,8 @@
               %h6 Hora
             %th
               %h6 Duración
+            %th
+              %h6 Tarifa
 
         -materia.materia_instances.each do |instance|
           %tr
@@ -30,3 +32,5 @@
               %h6= I18n.l instance.at_time, format: "%I:%M %p"
             %td
               %h6= instance.duration
+            %td
+              %h6= number_to_currency(instance.calculate_rate,:unit=> '$', :precision => 0, :format => '%u%n' )

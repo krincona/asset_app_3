@@ -14,7 +14,7 @@ class MateriaInstance < ActiveRecord::Base
   before_create  :set_materia_instance_status
 
   before_save    :set_materia_instance_status
-  after_save     :update_ids, :save_materia
+  after_save     :save_materia
   #after_destroy  :force_materia_reload
 
   
@@ -33,11 +33,8 @@ class MateriaInstance < ActiveRecord::Base
 
 
   def update_ids
-    if self.parent_id.nil?
-      self.parent_id = self.materia.student.parent.id  
-    end
-    if self.order_id.nil?
-      self.parent_id = self.materia.order.id  
+    if self.parent.id.nil?
+      self.parent_id = self.order.student.parent.id  
     end
   end
 

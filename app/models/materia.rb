@@ -46,6 +46,7 @@ class Materia < ActiveRecord::Base
 #new stuff - Functions
 
   def save_order
+    self.order.students_number = self.students_number
     self.order.save!
   end
 

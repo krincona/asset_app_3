@@ -32,6 +32,15 @@ class Student < ActiveRecord::Base
     end
   end
 
+  def self.check_tarifa
+    case self.calendar_schema
+    when "S"
+      return "Univ"
+    when "A" || "B"
+      return "Colegio"
+    end
+  end
+
   def shortname
     return self.name.split(' ', 2)[0]
   end

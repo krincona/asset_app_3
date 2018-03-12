@@ -56,6 +56,8 @@ class MateriaInstancesSpreadsheet
       #month = instance.order.for_month
       serial = instance.order.serial
       tutor = instance.tutor
+      #per_hour = tutor
+=begin
       if instance.materia.univ
         per_hour = 23000
       else
@@ -65,8 +67,9 @@ class MateriaInstancesSpreadsheet
           per_hour = 23000
         end
       end
+=end
 
-      subtotal = instance.duration*per_hour + instance.subsidy
+      subtotal = instance.total_payable
 
       tutors[:pending]={nombre:"Sin Asignar",cedula:"N/A",ordenes:{}}
 

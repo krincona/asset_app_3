@@ -67,6 +67,9 @@ strong {
 dfn {
   font-style: italic;
 }
+#stNumber {
+  width: 3em;
+}
 h1 {
   margin: .67em 0;
   font-size: 2em;

@@ -11,7 +11,8 @@
           .box-icon
             %span.fa.fa-4x.fa-user
           .info.text-center
-            %h5= student.name
+            %h5=student.name
+            
             = link_to "Solicitar", orders_path(student_id: student.id), {:method=> :post,class:"btn btn-asset-purple btn-lg",:type => "button",params:{student_id: student.id} }
 
     

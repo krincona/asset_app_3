@@ -1,7 +1,0 @@
-I"(function() {
-  $(document).ready(function() {
-    return jQuery(".best_in_place").best_in_place();
-  });
-
-}).call(this);
-:ET
