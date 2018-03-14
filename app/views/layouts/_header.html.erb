@@ -34,8 +34,11 @@
           </li>
 
         <% elsif current_user.role == 1 %>
-          <li><a href="#" data-toggle="modal" data-target="#contact_modal" id="white-font" >Servicio al Cliente</a></li>
-          <li><a href="<%= parent_calendar_parent_path(current_user.user_role_id)%>" id="white-font">Calendario</a></li>
+          <li><a href="#" data-toggle="data" modal-target="#contact_modal" id="white-font" >Servicio al Cliente</a></li>
+		<% if !current_user.user_role_id.nil?%>
+		  <li><a href="<%= parent_calendar_parent_path(current_user.user_role_id)%>" id="white-font">Calendario</a></li>	
+		<% end %>
+
           <li><a href="#" id="white-font">Perfil</a></li>
         <% end %>
 
