@@ -36,7 +36,7 @@ class Order < ActiveRecord::Base
 
   before_save :check_status
   
-  #after_initialize :after_initialize_callbacks
+  after_initialize :after_initialize_callbacks
     
   #Functions
 
