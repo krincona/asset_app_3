@@ -108,6 +108,7 @@ class MateriasController < ApplicationController
     @materia.destroy
     order.save!
 
+
     respond_to do |format|
       format.html {redirect_to(order_materias_path(order))}
     end

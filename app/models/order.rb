@@ -274,6 +274,17 @@ class Order < ActiveRecord::Base
       self.subtotal_tutoria    = self.calculate_subtotal_tutoria + self.subsidy #check
       self.subtotal_admin      = (self.subtotal_sale_price - self.discount - self.subtotal_tutoria)/1.19
       self.tax                 = self.subtotal_admin*0.19
+    else
+      self.hours               = 0
+      self.subtotal_sale_price = 0
+      self.subsidy             = 0
+      self.discount            = 0
+      self.sale_price          = self.subtotal_sale_price + self.subsidy - self.discount#
+      self.hourly_price        = self.calculate_hourly_price#check
+      self.hourly_payable        = self.calculate_hourly_payable#check
+      self.subtotal_tutoria    = self.calculate_subtotal_tutoria + self.subsidy #check
+      self.subtotal_admin      = (self.subtotal_sale_price - self.discount - self.subtotal_tutoria)/1.19
+      self.tax                 = self.subtotal_admin*0.19
     end
   end
 
