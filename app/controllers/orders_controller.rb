@@ -41,7 +41,7 @@ class OrdersController < ApplicationController
   # POST /orders
   # POST /orders.json
   def create
-    @order = Order.new(student_id:params[:student_id])
+    @order = Order.new(student_id:params[:student_id], tarifa:params[:tarifa])
 
     respond_to do |format|
       if @order.save
@@ -88,12 +88,9 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:student_id, :status, :re_date, :for_month,:payment_ref,
+      params.require(:order).permit(:student_id,:tarifa, :status, :re_date, :for_month,:payment_ref,
                     :payment_dateline, :init_cost, :renovate, :serial, :active, :admin_user_id,
-                    :payment_date, :curso, tutoria_instances_attributes:[:id,:topic,:tutor_id,
-                    :tutoria_id,:duration,:order_id,:status,:student_id,:subject,:serial,:student_number,
-                    :at_date,:at_time,:recurrence,:copy,:extra_horario_id,:_destroy],
-                    materias_attributes:[:id,:name, :wdays, :at_time, :ocurrence,:student_id,
+                    :payment_date, :curso, materias_attributes:[:id,:name, :wdays, :at_time, :ocurrence,:student_id,
                     :duration,:horario_id,:topic,:tutor_id,:order_id,:at_date,:_destroy])
     end
 end

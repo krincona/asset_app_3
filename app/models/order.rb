@@ -60,6 +60,18 @@ class Order < ActiveRecord::Base
     end
   end
 
+  def self.check_tarifa(student_id)
+    student = Student.find(student_id)
+      case student.calendar_schema
+      when "S"
+        return "Univ"
+      when "A"
+        return "Colegio"
+      when "B"
+        return "Colegio"
+      end
+  end 
+
   def check_instances_parms
     self.materias.each do |m|
       m.materia_instances.each {|i| i.update_attribute :parent_id,self.student.parent.id}
@@ -390,13 +402,7 @@ class Order < ActiveRecord::Base
       #self.status = 2
       self.created_by = "Coordinador"
     end
-    
-    case self.student.calendar_schema
-    when "S"
-      self.tarifa = "Univ"
-    when "A" || "B"
-      self.tarifa = "Colegio"
-    end
+
   end
 
 end

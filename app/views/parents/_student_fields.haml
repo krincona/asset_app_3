@@ -1,10 +1,23 @@
 .panel-body
-	.nested-fields
-		.row
-			.pull-right
-				= link_to_remove_association "Borrar Estudiante", f
+  .nested-fields
+    .form-group.row
+      .pull-right
+        = link_to_remove_association "Borrar Estudiante", f
+    .form-group.row
 
-		= f.input :name, label: false, placeholder: 'Nombre Completo', required: true, input_html: {class: 'student_name_input'}
-		= f.input :school, label: false, placeholder: 'Colegio / Universidad', required: true
-		= f.input :grade, label: false, placeholder: 'Grado', required: true
+      %label.col-xs-4.col-form-label{for:"name-input"} Nombre
+      .col-xs-8
+        = f.input_field :name, as: :text, type:"text",class: "form-control", id:"name-input", required:true
+    .form-group.row
+      %label.col-xs-4.col-form-label{for:"school-input"} Colegio
+      .col-xs-8
+        = f.input_field :school, as: :text, type:"text",class: "form-control", id:"school-input", required:true
+    .form-group.row
+      %label.col-xs-4.col-form-label{for:"grade-input"} Grado
+      .col-xs-8
+        = f.input_field :grade, value: f.object.grade || 1, type: "number", min:1, max:13, step: 1, :style => "width:70px",class:"form-control", id:"grade-input",required: true
+    .form-group.row
+      %label.col-xs-4.col-form-label{for:"calendar_schema-input"} Calendario
+      .col-xs-8
+        = f.input_field :calendar_schema, :as=> :select, collection:{"A"=>"A","B"=>"B","Semestral"=>"S"},include_blank: "Escoja uno...", type:"text",class: "form-control", id:"calendar_schema-input", required:true
 
