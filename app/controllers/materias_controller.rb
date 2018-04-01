@@ -106,7 +106,7 @@ class MateriasController < ApplicationController
     order = Order.find(params[:order_id])
     @materia = order.materias.find(params[:id])
     @materia.destroy
-    order.calc_serial
+    order.save!
 
     respond_to do |format|
       format.html {redirect_to(order_materias_path(order))}

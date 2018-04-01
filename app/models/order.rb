@@ -309,9 +309,7 @@ class Order < ActiveRecord::Base
 
     else 
       return 0
-    end 
-
-    
+    end  
   end
 
   def calculate_subtotal_sale_price#en uso 2018
