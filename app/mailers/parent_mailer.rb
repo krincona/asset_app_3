@@ -13,7 +13,7 @@ class ParentMailer < ActionMailer::Base
     @greeting = " #{@parent.name} y #{@student.name}"
 
     mail(to: @parent.email, subject: "Orden de Tutorias Reservada",
-         cc: ["contacto@asset-tutores.com", "jprincon@asset-tutores.com"])
+         cc: ["contacto@asset-tutores.com", "jprincon@asset-tutores.com", "asistencia@asset-tutores.com"])
   end
 
 
@@ -26,7 +26,7 @@ class ParentMailer < ActionMailer::Base
 
 
     mail(to: @parent.email, subject: "Orden de Tutorias Confirmada",
-      cc: ["contacto@asset-tutores.com", "jprincon@asset-tutores.com"] )
+      cc: ["contacto@asset-tutores.com", "jprincon@asset-tutores.com","asistencia@asset-tutores.com"] )
   end
 
 end

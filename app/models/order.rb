@@ -198,32 +198,6 @@ class Order < ActiveRecord::Base
       self.status = new_order_status
     end
   end
-=begin # old status checking code
-      materias_status = self.check_materias_status
-      if self.payment_ref == "-" # No esta paga
-        case materias_status
-        when 1 # No publicada
-          self.status = 1 # En proceso de creacion
-        when 2 # 1 o mas materias Publicadas (Orden No Paga)
-          self.status = 2 # En oferta
-        when 3 # Todas con tutor
-          self.status = 3 # Pendiente de pago
-        end  
-      else # Esta paga
-        if self.status == 5 && materias_status == 2 # 1 o mas materias Publicadas (Orden Paga)
-          self.status = 4 # Pendiente de Tutor
-        elsif self.status == 4 # Esta pendiente de tutor
-          case materias_status
-          when 2 # 1 o mas materias Publicadas (Orden Paga)
-            self.status = 4 # Pendiente de Tutor
-          when 3 || 5 # Todas con tutor
-            self.status = 5
-          end
-        else
-          self.status = 5         
-        end 
-      end
-=end
 
   def calculate_datelines
     if self.materias.count > 0 
