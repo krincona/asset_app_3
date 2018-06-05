@@ -36,7 +36,7 @@ class Order < ActiveRecord::Base
 
   before_save :check_status
   
-  after_initialize :after_initialize_callbacks
+  #after_initialize :after_initialize_callbacks
     
   #Functions
 
@@ -384,6 +384,7 @@ class Order < ActiveRecord::Base
       self.admin_user_id = 100
       #self.status = 1
       self.created_by = "Acudiente"
+      self.tarifa = "Colegio"
 
     else
       #self.status = 2
