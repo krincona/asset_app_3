@@ -36,7 +36,7 @@ class Order < ActiveRecord::Base
 
   before_save :check_status
   
-  #after_initialize :after_initialize_callbacks
+  after_initialize :after_initialize_callbacks
     
   #Functions
 
@@ -316,7 +316,9 @@ class Order < ActiveRecord::Base
 
 
   def calculate_hourly_payable# NUEVO - en uso 2018
-    return TARIFA_PAY[self.tarifa][self.students_number]
+    if !self.tarifa.nil?
+      return TARIFA_PAY[self.tarifa][self.students_number]
+    end
   end
 
   def update_materias_student
