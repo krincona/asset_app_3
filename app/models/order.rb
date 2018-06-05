@@ -23,7 +23,7 @@ class Order < ActiveRecord::Base
 
   STATUS = {1=>"En Proceso",2=>"En Oferta",3=> "Pendiente de Pago",4=>"Pendiente de Tutor", 5=>"Confirmada", 6=>"Caduca"}
 
-  TARIFA_PRICE={"Colegio"=>{1=>44000,2=>74000,3=>99000},"Curso"=>{1=>56000,2=>90000,3=>121000},"ICFES"=>{1=>43000,2=>73000,3=>98000},"Univ"=>{1=>56000,2=>90000,3=>121000}}
+  TARIFA_PRICE={"Anterior"=>{1=>41000,2=>70000,3=>96000},"Colegio"=>{1=>44000,2=>74000,3=>99000},"Curso"=>{1=>56000,2=>90000,3=>121000},"ICFES"=>{1=>43000,2=>73000,3=>98000},"Univ"=>{1=>56000,2=>90000,3=>121000}}
 
   TARIFA_PAY={"Anterior"=>{1=>18000,2=>23000,3=>25000},"Colegio"=>{1=>20000,2=>25000,3=>30000},"Curso"=>{1=>25000,2=>30000,3=>35000},"ICFES"=>{1=>20000,2=>25000,3=>30000},"Univ"=>{1=>25000,2=>30000,3=>35000}}
 
@@ -255,7 +255,7 @@ class Order < ActiveRecord::Base
       self.discount            = 0
       self.sale_price          = 0#self.subtotal_sale_price + self.subsidy - self.discount#
       self.hourly_price        = self.calculate_hourly_price#check
-      self.hourly_payable        = self.calculate_hourly_payable#check
+      self.hourly_payable      = self.calculate_hourly_payable#check
       self.subtotal_tutoria    = 0#self.calculate_subtotal_tutoria + self.subsidy #check
       self.subtotal_admin      = 0#(self.subtotal_sale_price - self.discount - self.subtotal_tutoria)/1.19
       self.tax                 = 0#self.subtotal_admin*0.19
@@ -309,7 +309,9 @@ class Order < ActiveRecord::Base
   end
 
   def calculate_hourly_price#en uso 2018
-    return TARIFA_PRICE[self.tarifa][self.students_number]
+    if !self.tarifa.nil?
+      return TARIFA_PRICE[self.tarifa][self.students_number]
+    end
   end
 
 
