@@ -115,8 +115,8 @@ gem 'best_in_place', '~> 3.0.3'
 gem 'ransack', '~> 1.8', '>= 1.8.2'
 
 # Sprockets Rails integration
-
-gem 'sprockets', '~> 3.7', '>= 3.7.2'
+# gem 'sprockets-rails', '~> 2.2.1', :require => 'sprockets/railtie'
+gem 'sprockets-rails', '~> 3.2'
 
 # bootstrap-sass is a Sass-powered version of Bootstrap 3, ready to drop right into your Sass powered applications.
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
