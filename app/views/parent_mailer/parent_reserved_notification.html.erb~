@@ -93,7 +93,7 @@
                        <% if @order.discount > 0 %>
                         <p>Descuento: <%=number_to_currency(@order.discount ,:unit => '$', :precision => 0, :format => '%u%n')%></p>
                        <%end%> 
-                       <p>Valor a Pagar: <%= number_to_currency(@order.sale_price + @order.subsidy ,:unit => '$', :precision => 0, :format => '%u%n')%>  </p>
+                       <p>Valor a Pagar: <%= number_to_currency(@order.sale_price ,:unit => '$', :precision => 0, :format => '%u%n')%>  </p>
                        <p>Numero de Referencia: <%= @order.serial %> </p>
                      </td>
                      <td style="font-size: 0; line-height: 0;" width="20">
