@@ -29,8 +29,8 @@ class Materia < ActiveRecord::Base
 
 
 
-  SUBJECTS=['Matematicas', 'Fisica', 'Quimica','Biologia', 'Sociales', 'Ingles','Español', 'Frances', 'Economia', 'Tareas','Excel','Contabilidad', 'Finanzas', 'Estadística', 'Filosofía'].sort
-
+  SUBJECTS=['Matemáticas', 'Física', 'Química','Biología', 'Sociales', 'Ingles','Español', 'Francés', 'Economia', 'Tareas','Excel','Contabilidad', 'Finanzas', 'Estadística', 'Filosofía'].sort
+              
   SUBJECTS_CURSO=['TOEFL','IELTS','Matematicas(SAT)', 'Ingles(SAT)'].sort
 
   SUBJECTS_UNIV = ['Matematicas', 'Fisica', 'Quimica','Biologia', 'Sociales', 'Ingles','Español', 'Frances', 'Economia','Excel','Contabilidad', 'Finanzas', 'Estadística', 'Filosofía'].sort
@@ -39,9 +39,9 @@ class Materia < ActiveRecord::Base
 
 
 
-  SUBJECTS_SHORT= {'Matematicas'=>'MAT', 'Fisica'=>'FIS', 'Quimica'=>'QUI','Biologia'=>'BIO', 'Sociales'=>'SOC', 'Ingles'=>'ING',
-            'Español'=>'ESP', 'Frances'=>'FRA', 'Economia'=>'ECO', 'Tareas'=>'TAREAS','TOEFL'=>'TOEFL','IELTS'=>'IELTS',
-            'Matematicas(SAT)'=>'MAT-SAT', 'Ingles(SAT)'=>'ING-SAT','Excel'=>'EXCEL','Contabilidad'=>'CONTABILIDAD', 'Finanzas'=>'FINANZAS', 'Estadística'=>'ESTADISTICA', 'Filosofía'=> 'FILO'}
+  SUBJECTS_SHORT= {'Matemáticas'=>'MAT', 'Física'=>'FIS', 'Química'=>'QUI','Biología'=>'BIO', 'Sociales'=>'SOC', 'Ingles'=>'ING',
+            'Español'=>'ESP', 'Francés'=>'FRA', 'Economia'=>'ECO', 'Tareas'=>'TAREAS','TOEFL'=>'TOEFL','IELTS'=>'IELTS',
+            'Matemáticas(SAT)'=>'MAT-SAT', 'Ingles(SAT)'=>'ING-SAT','Excel'=>'EXCEL','Contabilidad'=>'CONTABILIDAD', 'Finanzas'=>'FINANZAS', 'Estadística'=>'ESTADISTICA', 'Filosofía'=> 'FILO'}
 
 #new stuff - Functions
 
