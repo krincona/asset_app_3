@@ -242,7 +242,7 @@ class Order < ActiveRecord::Base
       self.subtotal_sale_price = self.calculate_subtotal_sale_price#check
       self.subsidy             = self.calculate_subsidy_amount#check
       self.discount            = self.calculate_discount_sale_price#check
-      self.sale_price          = self.subtotal_sale_price - self.discount#
+      self.sale_price          = self.calculate_sale_price
       self.hourly_price        = self.calculate_hourly_price#check
       self.hourly_payable      = self.calculate_hourly_payable#check
       self.subtotal_tutoria    = self.calculate_subtotal_tutoria + self.subsidy #check
