@@ -41,7 +41,9 @@ class Materia < ActiveRecord::Base
 
   SUBJECTS_SHORT= {'Matemáticas'=>'MAT', 'Física'=>'FIS', 'Química'=>'QUI','Biología'=>'BIO', 'Sociales'=>'SOC', 'Ingles'=>'ING',
             'Español'=>'ESP', 'Francés'=>'FRA', 'Economia'=>'ECO', 'Tareas'=>'TAREAS','TOEFL'=>'TOEFL','IELTS'=>'IELTS',
-            'Matemáticas(SAT)'=>'MAT-SAT', 'Ingles(SAT)'=>'ING-SAT','Excel'=>'EXCEL','Contabilidad'=>'CONTABILIDAD', 'Finanzas'=>'FINANZAS', 'Estadística'=>'ESTADISTICA', 'Filosofía'=> 'FILO'}
+            'Matemáticas(SAT)'=>'MAT-SAT', 'Ingles(SAT)'=>'ING-SAT','Excel'=>'EXCEL','Contabilidad'=>'CONTABILIDAD', 'Finanzas'=>'FINANZAS', 'Estadística'=>'ESTADISTICA', 'Filosofía'=> 'FILO',
+            'Matematicas'=>'MAT', 'Fisica'=>'FIS', 'Quimica'=>'QUI','Biologia'=>'BIO','Frances'=>'FRA','Matematicas(SAT)'=>'MAT-SAT', 'Estadistica'=>'ESTADISTICA', 'Filosofia'=> 'FILO'
+                  }
 
 #new stuff - Functions
 
