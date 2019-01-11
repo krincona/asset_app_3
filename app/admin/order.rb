@@ -80,7 +80,7 @@ ActiveAdmin.register Order do
           status_tag o.status_name, :ok
         when 6
           status_tag o.status_name, :default
-        end
+      end
     end
 
     column "Limite Pago", :payment_dateline, sortable: true
@@ -255,7 +255,7 @@ ActiveAdmin.register Order do
         end
       end
       column span:2 do
-        tarifa = order.tarifa.nil? ?  " " : " - " +order.tarifa
+        tarifa = order.tarifa.nil? ?  " " : " - " + order.tarifa
         panel 'Resumen Costo por Materia' + tarifa do
           table_for order.materias.sort_by &:name do
             column "Materia", :name
@@ -290,7 +290,7 @@ ActiveAdmin.register Order do
               number_to_currency(order.subsidy,:unit => '$', :precision => 0, :format => '%u%n')
             end
             column "Total" do
-              number_to_currency(order.sale_price,:unit => '$', :precision => 0, :format => '%u%n')
+              number_to_currency(order.reload.sale_price,:unit => '$', :precision => 0, :format => '%u%n')
             end
 
           end
