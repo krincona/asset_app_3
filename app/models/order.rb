@@ -298,6 +298,7 @@ class Order < ActiveRecord::Base
   end
 
   def calculate_subtotal_sale_price#en uso 2018
+    total = 0
     total = self.calculate_total_sale_hours*self.calculate_hourly_price
     return total 
   end
