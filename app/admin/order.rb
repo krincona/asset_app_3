@@ -97,14 +97,18 @@ ActiveAdmin.register Order do
      number_to_currency(o.subsidy,:unit => '$', :precision => 0, :format => '%u%n' )
     end
 =end
+    column "Costo por Hora" do |o|
+      number_to_currency(o.hourly_price, :unit=> '$', :precision => 0, :format => '%u%n')
+    end
+    column "Descuento" do |o|
+     number_to_currency(order.reload.discount,:unit => '$', :precision => 0, :format => '%u%n')
+    end
     column "Costo Total"  do |o|
      number_to_currency(o.sale_price,:unit => '$', :precision => 0, :format => '%u%n' )#(o.monthly_total_cost + o.subsidy_total,:unit => '$', :precision => 0, :format => '%u%n' )
     end
 
-    column "Costo por Hora" do |o|
-      number_to_currency(o.hourly_price, :unit=> '$', :precision => 0, :format => '%u%n')
-    end
-
+    
+    
   end
 
   filter :serial, as: :numeric,:label => 'Consecutivo'
