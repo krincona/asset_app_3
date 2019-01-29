@@ -21,7 +21,7 @@ class TutorsController < ApplicationController
   def show
     if user_signed_in?
       @tutor = Tutor.find(params[:id])
-      @mytutoria_instances = @tutor.materia_instances
+      @mytutoria_instances = @tutor.materia_instanceslimit(50)
 
       respond_to do |format|
         format.html # show.html.erb
