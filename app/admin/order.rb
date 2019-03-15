@@ -369,6 +369,6 @@ ActiveAdmin.register Order do
     column (:valor_tutores_total) {|order| order.subtotal_tutoria.to_f }#check
     column (:valor_serv_coord) {|order| order.subtotal_admin.to_f}#check
     column (:valor_impuesto) {|order| order.tax.to_f}#check
-    column (:valor_total) {|order| order.sale_price.to_f+order.subsidy.to_f}#check
+    column (:valor_total) {|order| order.sale_price.to_f}#check
   end
 end
