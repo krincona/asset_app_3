@@ -46,7 +46,7 @@ class MateriaInstance < ActiveRecord::Base
 
   def payable?
     if self.materia_instance_status_id != 5
-      self.at_date.month == (Date.today - 1.month).month && self.at_date.year >= 2018 #Date.today.year
+      self.at_date.month == (Date.today - 1.month).month && self.at_date.year > 2018 #Date.today.year
     else
       false
     end
