@@ -305,7 +305,7 @@ class Order < ActiveRecord::Base
 
   def calculate_sale_price
     total = 0
-    total = self.calculate_subtotal_tutoria + self.calculate_subsidy_amount + self.subtotal_admin + self.tax - self.calculate_discount_sale_price
+    total = self.calculate_subtotal_tutoria + self.calculate_subsidy_amount + self.subtotal_admin + self.tax - self.discount
     return total
   end
 
