@@ -294,7 +294,7 @@ ActiveAdmin.register Order do
               number_to_currency(order.subsidy,:unit => '$', :precision => 0, :format => '%u%n')
             end
             column "Total" do
-              number_to_currency(order.reload.sale_price,:unit => '$', :precision => 0, :format => '%u%n')
+              number_to_currency(order.sale_price,:unit => '$', :precision => 0, :format => '%u%n')
             end
 
           end
