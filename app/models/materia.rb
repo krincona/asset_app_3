@@ -29,7 +29,7 @@ class Materia < ActiveRecord::Base
 
 
 
-  SUBJECTS=['Matemáticas', 'Física', 'Química','Biología', 'Sociales', 'Ingles','Español', 'Francés', 'Economia', 'Tareas','Excel','Contabilidad', 'Finanzas', 'Estadística', 'Filosofía'].sort
+  SUBJECTS=['Matemáticas', 'Física', 'Química','Biología', 'Sociales', 'Ingles','Español', 'Francés', 'Economia', 'Tareas','Excel','Contabilidad', 'Finanzas', 'Estadística', 'Filosofía','Matematicas(SAT)', 'Ingles(SAT)'].sort
               
   SUBJECTS_CURSO=['TOEFL','IELTS','Matematicas(SAT)', 'Ingles(SAT)'].sort
 
