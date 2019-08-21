@@ -33,7 +33,7 @@ class Materia < ActiveRecord::Base
               
   SUBJECTS_CURSO=['TOEFL','IELTS','Matematicas(SAT)', 'Ingles(SAT)'].sort
 
-  SUBJECTS_UNIV = ['Matematicas', 'Fisica', 'Quimica','Biologia', 'Sociales', 'Ingles','Español', 'Frances', 'Economia','Excel','Contabilidad', 'Finanzas', 'Estadística', 'Filosofía'].sort
+  SUBJECTS_UNIV = ['Matematicas', 'Fisica', 'Quimica','Biologia', 'Sociales', 'Ingles','Español', 'Frances', 'Economia','Excel','Contabilidad', 'Finanzas', 'Estadística', 'Filosofía', 'Tareas'].sort
 
   SUBJECTS_ICFES = ['Matematicas', 'Fisica', 'Quimica','Biologia', 'Sociales', 'Español'].sort
 
