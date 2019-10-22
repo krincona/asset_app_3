@@ -167,8 +167,11 @@ ActiveAdmin.register Order do
     end
 
     f.inputs "Materias" + tarifa do
-      
-      f.input :students_number, as: :number, label: " #Estudiantes", required: true, :input_html => {:min => 1,:step=>1,:max=>4}
+      if f.object.new_record?
+        f.input :students_number, as: :number, label: " #Estudiantes", required: true, :input_html => {:min => 1,:step=>1,:max=>4}
+      else 
+        f.input :students_number, as: :number, label: " #Estudiantes", required: true
+      end 
       f.has_many :materias, :allow_destroy => false,:heading => "Agregar Tutoria", :new_record => new_val do |materia|
         
         materia.input :student_id, as: :hidden, :input_html=>{value:"#{object.student_id}" }
