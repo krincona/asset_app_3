@@ -6,7 +6,7 @@ ActiveAdmin.register Order do
 
   config.sort_order = 'serial_desc'
 
-  #config.paginate = false
+  
 
 
 
