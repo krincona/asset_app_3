@@ -71,6 +71,7 @@ ActiveAdmin.register Tutor do
     column "Nombre", sortable: true do |tutor|
       link_to(tutor.name, admin_tutor_path(tutor))
     end
+    column "Cedula", :card_id
     column "Disponibilidad" do |t|
       if t.non_fixed
         status_tag "Esporadicas", :warn
@@ -144,5 +145,8 @@ ActiveAdmin.register Tutor do
       end 
     end    
   end
+  
+  
+  
 
 end
