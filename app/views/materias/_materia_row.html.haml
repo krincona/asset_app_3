@@ -1,5 +1,5 @@
 .panel.panel-default{:id=>"materia#{materia.id}"}
-  - if materia.place.[0,3]=="MED"
+  - if materia.place[0,3]=="MED"
     .panel-heading-med
     = #link_to "#{materia.name} x #{materia.total_hours} horas #{number_to_currency(materia.sale_price,:unit=> '$', :precision => 0, :format => '%u%n' )}", edit_order_materia_path(materia.order,materia),
         {:remote => true, class: "btn btn-asset btn-lg btn-block", :type=>"button",:style=>"white-space:normal"}
