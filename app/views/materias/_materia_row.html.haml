@@ -1,15 +1,18 @@
 .panel.panel-default{:id=>"materia#{materia.id}"}
-  .panel-heading
-    = #link_to "#{materia.name} x #{materia.total_hours} horas #{number_to_currency(materia.sale_price,:unit=> '$', :precision => 0, :format => '%u%n' )}", edit_order_materia_path(materia.order,materia),
-      {:remote => true, class: "btn btn-asset btn-lg btn-block", :type=>"button",:style=>"white-space:normal"}
-    .btn-group.btn-group-justified{"aria-label" => "button-group", :role => "group"}
-      .col-xs-8.pull-left
-        %button.btn.btn-asset.btn-lg.btn-block.accordion-toggle{:style=>"white-space:normal","data-toggle" => "collapse", "data-parent" => "#accordion", :href=>"#collapse_materia#{materia.id}"}
-          .materia= "#{materia.name} x #{materia.reload.total_hours} horas #{number_to_currency(materia.reload.sale_price,:unit=> '$', :precision => 0, :format => '%u%n' )}"
-      .col-xs-4.pull-right
-        .box-icon-materia
-          = link_to edit_order_materia_path(materia.order,materia),{:remote => true,:type=>"button",:style=>"white-space:normal"} do
-            .fa.fa-2x.fa-pencil
+  - if materia.place.[0,3]=="MED"
+    .panel-heading-med
+  -else
+    .panel-heading
+      = #link_to "#{materia.name} x #{materia.total_hours} horas #{number_to_currency(materia.sale_price,:unit=> '$', :precision => 0, :format => '%u%n' )}", edit_order_materia_path(materia.order,materia),
+        {:remote => true, class: "btn btn-asset btn-lg btn-block", :type=>"button",:style=>"white-space:normal"}
+      .btn-group.btn-group-justified{"aria-label" => "button-group", :role => "group"}
+        .col-xs-8.pull-left
+          %button.btn.btn-asset.btn-lg.btn-block.accordion-toggle{:style=>"white-space:normal","data-toggle" => "collapse", "data-parent" => "#accordion", :href=>"#collapse_materia#{materia.id}"}
+            .materia= "#{materia.name} x #{materia.reload.total_hours} horas #{number_to_currency(materia.reload.sale_price,:unit=> '$', :precision => 0, :format => '%u%n' )}"
+        .col-xs-4.pull-right
+          .box-icon-materia
+            = link_to edit_order_materia_path(materia.order,materia),{:remote => true,:type=>"button",:style=>"white-space:normal"} do
+              .fa.fa-2x.fa-pencil
   .panel-collapse.collapse{:id=>"collapse_materia#{materia.id}"}
     .panel-body.text-left
       %table{:align => "center", :width => "100%"}
