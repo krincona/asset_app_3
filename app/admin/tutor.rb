@@ -145,7 +145,25 @@ ActiveAdmin.register Tutor do
       end 
     end    
   end
-  
+  csv  do
+    column (:consecutivo) {|order| order.serial} #check
+    column (:referencia_de_pago) {|order| order.payment_ref} #check
+    column (:fecha_de_pago) {|order| order.payment_date} #check
+    column (:estado)  {|order| order.status_name} #check
+    column (:estudiante) {|order| order.student.name unless order.student.nil?} #check
+    column (:cliente) {|order| order.student.parent.name unless order.student.nil?} #check
+    column (:documento_cliente) {|order|  "#{order.student.parent.card_id_type} - #{order.student.parent.card_id}" unless order.student.nil? }#check
+    column (:cantidad_horas) {|order| order.hours.to_f }#check
+    column (:descuento) {|order| order.discount.to_f}#check
+    column (:valor_hora) {|order| order.hourly_price.to_f}#check
+    #column (:costo_creacion_plan) {|order| order.creation_cost.to_f}#check
+    column (:valor_tutores_subsidio) {|order| order.subsidy.to_f}#check
+    column (:valor_tutores_tutorias) {|order| order.subtotal_tutoria.to_f - order.subsidy.to_f}#check
+    column (:valor_tutores_total) {|order| order.subtotal_tutoria.to_f }#check
+    column (:valor_serv_coord) {|order| order.subtotal_admin.to_f}#check
+    column (:valor_impuesto) {|order| order.tax.to_f}#check
+    column (:valor_total) {|order| order.sale_price.to_f}#check
+  end
   
   
 
