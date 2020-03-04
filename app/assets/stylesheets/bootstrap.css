@@ -5977,7 +5977,7 @@ button.list-group-item-danger.active:focus {
   background-color: #0EA598;
   border-color: #ddd;
 }
-.panel-default > .panel-heading-med {
+.panel-default-med > .panel-heading {
   color: #fff;
   background-color: #2c1033;
   border-color: #ddd;
