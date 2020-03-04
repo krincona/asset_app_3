@@ -1,34 +1,59 @@
 .panel.panel-default
   -if materia.place[0,3]=="MED"
     .panel-heading-med
+      .btn-group.btn-group-justified{"aria-label" => "button-group",
+      :role => "group"}
+  
+        .col-xs-9.pull-left
+  
+          %a.btn.btn-asset.btn-block{:type=>"button",:style=>"white-space:normal",
+          "data-parent" => "#accordion", "data-toggle" => "collapse",
+          :href => "#collapse#{materia.id}", "white-space"=>"normal" }
+            .text-left
+              = materia.resume_materia
+             
+  
+  
+        .col-xs-3
+          .col-xs-6
+            %a.button.btn.btn-asset.btn-block{:type => "button",
+            "data-confirm" => "¿Esta usted seguro?",
+            :href => "#{ tutor_postulation_materia_path(materia)}",
+            :style=>"align:center", "white-space"=>"normal"}
+              .text-center
+                %i.fa.fa-paper-plane-o.fa-2x{"aria-hidden"=>"true"}
+        .col-xs-9.pull-left 
+          .text-left
+            -if materia.has_tags?
+              .label.label-default= materia.tags
   -else
     .panel-heading
 
-    .btn-group.btn-group-justified{"aria-label" => "button-group",
-    :role => "group"}
-
-      .col-xs-9.pull-left
-
-        %a.btn.btn-asset.btn-block{:type=>"button",:style=>"white-space:normal",
-        "data-parent" => "#accordion", "data-toggle" => "collapse",
-        :href => "#collapse#{materia.id}", "white-space"=>"normal" }
+      .btn-group.btn-group-justified{"aria-label" => "button-group",
+      :role => "group"}
+  
+        .col-xs-9.pull-left
+  
+          %a.btn.btn-asset.btn-block{:type=>"button",:style=>"white-space:normal",
+          "data-parent" => "#accordion", "data-toggle" => "collapse",
+          :href => "#collapse#{materia.id}", "white-space"=>"normal" }
+            .text-left
+              = materia.resume_materia
+             
+  
+  
+        .col-xs-3
+          .col-xs-6
+            %a.button.btn.btn-asset.btn-block{:type => "button",
+            "data-confirm" => "¿Esta usted seguro?",
+            :href => "#{ tutor_postulation_materia_path(materia)}",
+            :style=>"align:center", "white-space"=>"normal"}
+              .text-center
+                %i.fa.fa-paper-plane-o.fa-2x{"aria-hidden"=>"true"}
+        .col-xs-9.pull-left 
           .text-left
-            = materia.resume_materia
-           
-
-
-      .col-xs-3
-        .col-xs-6
-          %a.button.btn.btn-asset.btn-block{:type => "button",
-          "data-confirm" => "¿Esta usted seguro?",
-          :href => "#{ tutor_postulation_materia_path(materia)}",
-          :style=>"align:center", "white-space"=>"normal"}
-            .text-center
-              %i.fa.fa-paper-plane-o.fa-2x{"aria-hidden"=>"true"}
-      .col-xs-9.pull-left 
-        .text-left
-          -if materia.has_tags?
-            .label.label-default= materia.tags
+            -if materia.has_tags?
+              .label.label-default= materia.tags
 
 
 
