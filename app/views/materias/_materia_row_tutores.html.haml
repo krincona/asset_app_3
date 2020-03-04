@@ -1,5 +1,5 @@
 -if materia.place[0,3]=="MED"
-  .panel-default-med
+  .panel.panel-default-med
     .panel-heading
       .btn-group.btn-group-justified{"aria-label" => "button-group",
       :role => "group"}
@@ -27,7 +27,7 @@
             -if materia.has_tags?
               .label.label-default= materia.tags
 -else
-  .panel-default
+  .panel.panel-default
     .panel-heading
       .btn-group.btn-group-justified{"aria-label" => "button-group",
       :role => "group"}
