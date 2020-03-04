@@ -1,5 +1,8 @@
 .panel.panel-default
-  .panel-heading
+  -if materia.place[0,3]=="MED"
+    .panel-heading-med
+  -else
+    .panel-heading
 
     .btn-group.btn-group-justified{"aria-label" => "button-group",
     :role => "group"}
