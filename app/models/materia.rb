@@ -306,6 +306,12 @@ class Materia < ActiveRecord::Base
 
   def tags
     tags = ""
+    
+    if self.place[0,3]== "MED"
+      tags+="#Medellin  "
+    else
+      tags+="#Bogota  "
+    end
     if self.weekly
       tags+="#Fija Semanal  "
     end

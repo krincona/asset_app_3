@@ -23,9 +23,9 @@ class Order < ActiveRecord::Base
 
   STATUS = {1=>"En Proceso",2=>"En Oferta",3=> "Pendiente de Pago",4=>"Pendiente de Tutor", 5=>"Confirmada", 6=>"Caduca"}
 
-  TARIFA_PRICE={"Anterior"=>{1=>41000,2=>70000,3=>96000},"Colegio"=>{1=>44000,2=>74000,3=>99000},"Curso"=>{1=>56000,2=>90000,3=>121000},"ICFES"=>{1=>43000,2=>73000,3=>98000},"Univ"=>{1=>56000,2=>90000,3=>121000}}
+  TARIFA_PRICE={"Anterior"=>{1=>41000,2=>70000,3=>96000},"Colegio"=>{1=>46000,2=>74000,3=>99000},"Curso"=>{1=>56000,2=>90000,3=>121000},"ICFES"=>{1=>43000,2=>73000,3=>98000},"Univ"=>{1=>58000,2=>90000,3=>121000}}
 
-  TARIFA_PAY={"Anterior"=>{1=>18000,2=>23000,3=>25000},"Colegio"=>{1=>20000,2=>25000,3=>30000},"Curso"=>{1=>25000,2=>30000,3=>35000},"ICFES"=>{1=>20000,2=>25000,3=>30000},"Univ"=>{1=>25000,2=>30000,3=>35000}}
+  TARIFA_PAY={"Anterior"=>{1=>18000,2=>23000,3=>25000},"Colegio"=>{1=>22000,2=>25000,3=>30000},"Curso"=>{1=>25000,2=>30000,3=>35000},"ICFES"=>{1=>20000,2=>25000,3=>30000},"Univ"=>{1=>27000,2=>30000,3=>35000}}
 
   #Callbacks
   before_create :set_order_status
@@ -279,22 +279,44 @@ class Order < ActiveRecord::Base
   end
   
   def calculate_discount_sale_price#en uso 2018
+  
+    if self.created_at < '2020-03-01'
 
-    if self.tarifa == "Colegio"
-      case self.calculate_total_sale_hours
-      when 0...16
+      if self.tarifa == "Colegio"
+        case self.calculate_total_sale_hours
+        when 0...16
+          return 0
+        when 16...24
+          return 4000 * self.calculate_total_sale_hours
+        when 24...1000
+          return 6000 * self.calculate_total_sale_hours
+        else
+          return nil
+        end
+  
+      else 
         return 0
-      when 16...24
-        return 4000 * self.calculate_total_sale_hours
-      when 24...1000
-        return 6000 * self.calculate_total_sale_hours
-      else
-        return nil
+      end  
+    
+    else
+      if self.tarifa == "Colegio"
+        case self.calculate_total_sale_hours
+        when 0...9
+          return 0
+        when 9...12
+          return 0.10 * self.calculate_subtotal_sale_price
+        when 12...24
+          return 0.15 * self.calculate_subtotal_sale_hours
+        when 24...1000
+          return 0.21 * self.calculate_subtotal_sale_hours
+        else
+          return nil
+        end
+  
+      else 
+        return 0
       end
-
-    else 
-      return 0
-    end  
+    end
   end
 
   def calculate_subtotal_sale_price#en uso 2018
@@ -311,14 +333,23 @@ class Order < ActiveRecord::Base
 
   def calculate_hourly_price#en uso 2018
     if !self.tarifa.nil?
-      return TARIFA_PRICE[self.tarifa][self.students_number]
+      if self.created_at < '2020-03-01' && self.students_number == 1
+        return 44000
+      else
+        return TARIFA_PRICE[self.tarifa][self.students_number]
+      end
     end
   end
 
 
   def calculate_hourly_payable# NUEVO - en uso 2018
     if !self.tarifa.nil?
-      return TARIFA_PAY[self.tarifa][self.students_number]
+      #return TARIFA_PAY[self.tarifa][self.students_number]
+      if self.created_at < '2020-03-01' && self.students_number == 1
+        return 44000
+      else
+        return TARIFA_PAY[self.tarifa][self.students_number]
+      end
     end
   end
 
