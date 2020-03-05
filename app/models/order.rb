@@ -332,7 +332,7 @@ class Order < ActiveRecord::Base
   end
 
   def calculate_hourly_price#en uso 2018
-    if !self.tarifa.nil?
+    if !self.tarifa.nil? && !self.created_at.nil?
       if self.created_at < '2020-03-01' && self.students_number == 1
         return 44000
       else
@@ -343,7 +343,7 @@ class Order < ActiveRecord::Base
 
 
   def calculate_hourly_payable# NUEVO - en uso 2018
-    if !self.tarifa.nil?
+    if !self.tarifa.nil? && !self.created_at.nil?
       #return TARIFA_PAY[self.tarifa][self.students_number]
       if self.created_at < '2020-03-01' && self.students_number == 1
         return 44000
