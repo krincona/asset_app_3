@@ -306,9 +306,9 @@ class Order < ActiveRecord::Base
         when 9...12
           return 0.10 * self.calculate_subtotal_sale_price
         when 12...24
-          return 0.15 * self.calculate_subtotal_sale_hours
+          return 0.15 * self.calculate_subtotal_sale_price
         when 24...1000
-          return 0.21 * self.calculate_subtotal_sale_hours
+          return 0.21 * self.calculate_subtotal_sale_price
         else
           return nil
         end
