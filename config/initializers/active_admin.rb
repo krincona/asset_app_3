@@ -6,8 +6,8 @@ ActiveAdmin.setup do |config|
   # Set the title that is displayed on the main layout
   # for each of the active admin pages.
   #
-  config.site_title_image = "/images/logo.jpg"
-  config.site_title = "Asset 2.0"
+  config.site_title_image = "/images/assetLogo.png"
+  config.site_title = "Asset 3.0"
 
   Ransack.configure do |config|
   %w[contained_within contained_within_or_equals contains contains_or_equals overlap].each do |p|
