@@ -23,7 +23,16 @@ class Order < ActiveRecord::Base
 
   STATUS = {1=>"En Proceso",2=>"En Oferta",3=> "Pendiente de Pago",4=>"Pendiente de Tutor", 5=>"Confirmada", 6=>"Caduca"}
 
-  TARIFA_PRICE={"Anterior"=>{1=>41000,2=>70000,3=>96000},"Colegio"=>{1=>46000,2=>74000,3=>99000},"Curso"=>{1=>56000,2=>90000,3=>121000},"ICFES"=>{1=>43000,2=>73000,3=>98000},"Univ"=>{1=>58000,2=>90000,3=>121000}}
+  TARIFA_PRICE={
+    "Anterior"=>{1=>41000,2=>70000,3=>96000},
+    "Colegio"=>{1=>46000,2=>74000,3=>99000},
+    "Curso"=>{1=>56000,2=>90000,3=>121000},
+    "ICFES"=>{1=>43000,2=>73000,3=>98000},
+    "Univ"=>{1=>58000,2=>90000,3=>121000},
+    "Virtual"=>{1=>35400},
+    "Curso Virtual"=>{1=>39600},
+    "ICFES Virtual"=>{1=>35400}
+  }
 
   TARIFA_PAY={"Anterior"=>{1=>18000,2=>23000,3=>25000},"Colegio"=>{1=>22000,2=>25000,3=>30000},"Curso"=>{1=>25000,2=>30000,3=>35000},"ICFES"=>{1=>20000,2=>25000,3=>30000},"Univ"=>{1=>27000,2=>30000,3=>35000}}
 
@@ -277,7 +286,8 @@ class Order < ActiveRecord::Base
     total = sessions*subsidy
     return total
   end
-  
+
+# Todo el codigo de descuento deberia mudarse a un modelo :(  
   def calculate_discount_sale_price#en uso 2018
   
     if self.created_at < '2020-03-01'
@@ -299,6 +309,7 @@ class Order < ActiveRecord::Base
       end  
     
     else
+      
       if self.tarifa == "Colegio"
         case self.calculate_total_sale_hours
         when 0...9
@@ -312,7 +323,19 @@ class Order < ActiveRecord::Base
         else
           return nil
         end
-  
+      elsif self.tarifa == "Virtual"
+        case self.calculate_total_sale_hours
+        when 0...9
+          return 0
+        when 9...12
+          return 36600
+        when 12...24
+          return 73800
+        when 24...1000
+          return 0.21 * self.calculate_subtotal_sale_price
+        else
+          return nil
+        end
       else 
         return 0
       end
@@ -346,7 +369,7 @@ class Order < ActiveRecord::Base
     if !self.tarifa.nil? && !self.created_at.nil?
       #return TARIFA_PAY[self.tarifa][self.students_number]
       if self.created_at < '2020-03-01' && self.students_number == 1
-        return 44000
+        return 20000
       else
         return TARIFA_PAY[self.tarifa][self.students_number]
       end
