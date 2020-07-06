@@ -41,7 +41,7 @@ class Order < ActiveRecord::Base
       "Curso Virtual"=>{1=>20000},
       "ICFES"=>{1=>20000,2=>25000,3=>30000},
       "Univ"=>{1=>27000,2=>30000,3=>35000},
-      "Virtual"=>{1=>15000}
+      "ICFES Virtual"=>{1=>15000}
   }
 
   #Callbacks
