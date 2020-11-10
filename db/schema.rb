@@ -16,12 +16,12 @@ ActiveRecord::Schema.define(version: 20180118114207) do
   enable_extension "plpgsql"
 
   create_table "active_admin_comments", force: :cascade do |t|
-    t.string   "namespace",     limit: 255
+    t.string   "namespace"
     t.text     "body"
-    t.string   "resource_id",   limit: 255, null: false
-    t.string   "resource_type", limit: 255, null: false
+    t.string   "resource_id",   null: false
+    t.string   "resource_type", null: false
+    t.string   "author_type"
     t.integer  "author_id"
-    t.string   "author_type",   limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id", using: :btree
@@ -30,20 +30,20 @@ ActiveRecord::Schema.define(version: 20180118114207) do
   end
 
   create_table "admin_users", force: :cascade do |t|
-    t.string   "email",                  limit: 255, default: "", null: false
-    t.string   "encrypted_password",     limit: 255, default: "", null: false
-    t.string   "reset_password_token",   limit: 255
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                      default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "role",                               default: 0
-    t.string   "name",                   limit: 255
+    t.integer  "role",                   default: 0
+    t.string   "name"
     t.index ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
   end
@@ -51,15 +51,15 @@ ActiveRecord::Schema.define(version: 20180118114207) do
   create_table "comments", force: :cascade do |t|
     t.text     "body"
     t.integer  "commentable_id"
-    t.string   "commentable_type", limit: 255
+    t.string   "commentable_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "constants", force: :cascade do |t|
-    t.string   "name",        limit: 255
-    t.string   "value",       limit: 255
-    t.string   "description", limit: 255
+    t.string   "name"
+    t.string   "value"
+    t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -82,76 +82,49 @@ ActiveRecord::Schema.define(version: 20180118114207) do
 
   create_table "institute_users", force: :cascade do |t|
     t.integer  "user_id"
-    t.string   "name",          limit: 255
-    t.string   "contact_phone", limit: 255
-    t.string   "position",      limit: 255
+    t.string   "name"
+    t.string   "contact_phone"
+    t.string   "position"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "institute_id"
-    t.string   "email",         limit: 255
-    t.string   "card_id",       limit: 255
+    t.string   "email"
+    t.string   "card_id"
     t.index ["institute_id"], name: "index_institute_users_on_institute_id", using: :btree
     t.index ["user_id"], name: "index_institute_users_on_user_id", using: :btree
   end
 
   create_table "institutes", force: :cascade do |t|
-    t.string   "name",            limit: 255
-    t.string   "calendar_schema", limit: 255
-    t.string   "address",         limit: 255
-    t.string   "pbx",             limit: 255
+    t.string   "name"
+    t.string   "calendar_schema"
+    t.string   "address"
+    t.string   "pbx"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "invoices", force: :cascade do |t|
-    t.string   "bill_to",              limit: 255
+    t.string   "bill_to"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "tutor_id"
     t.integer  "month"
-    t.decimal  "tax_rate"
-    t.integer  "invoice_number"
-    t.string   "ship_to",              limit: 255
-    t.string   "notes",                limit: 255
-    t.string   "line_items",           limit: 255
-    t.float    "shipping_rate"
-    t.string   "shipping_description", limit: 255
-    t.string   "tax_description",      limit: 255
-    t.date     "due_at"
-    t.string   "paid_at",              limit: 255
-    t.date     "refunded_at"
-    t.string   "currency",             limit: 255
-    t.text     "invoice_details",                  default: [], array: true
-    t.date     "invoice_date"
     t.index ["tutor_id"], name: "index_invoices_on_tutor_id", using: :btree
   end
 
   create_table "line_items", force: :cascade do |t|
     t.decimal  "price"
-    t.string   "description",      limit: 255
+    t.string   "description"
     t.integer  "quantity"
     t.integer  "invoice_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "tutoria_id"
-    t.decimal  "display_price"
-    t.decimal  "display_quantity"
     t.index ["tutoria_id"], name: "index_line_items_on_tutoria_id", using: :btree
   end
 
-  create_table "listings", force: :cascade do |t|
-    t.string   "title",      limit: 255
-    t.integer  "status"
-    t.integer  "tutor_id"
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.index ["tutor_id"], name: "index_listings_on_tutor_id", using: :btree
-    t.index ["user_id"], name: "index_listings_on_user_id", using: :btree
-  end
-
   create_table "materia", force: :cascade do |t|
-    t.string   "name",              limit: 255
+    t.string   "name"
     t.integer  "student_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -163,9 +136,8 @@ ActiveRecord::Schema.define(version: 20180118114207) do
     t.boolean  "weekly"
     t.integer  "materia_status_id"
     t.integer  "students_number"
-    t.boolean  "univ"
-    t.string   "producto"
     t.boolean  "active"
+    t.boolean  "univ"
     t.date     "until_re_date"
     t.index ["materia_status_id"], name: "index_materia_on_materia_status_id", using: :btree
     t.index ["order_id"], name: "index_materia_on_order_id", using: :btree
@@ -173,7 +145,7 @@ ActiveRecord::Schema.define(version: 20180118114207) do
   end
 
   create_table "materia_instance_statuses", force: :cascade do |t|
-    t.string   "name",       limit: 255
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -199,13 +171,13 @@ ActiveRecord::Schema.define(version: 20180118114207) do
   end
 
   create_table "materia_statuses", force: :cascade do |t|
-    t.string   "name",       limit: 255
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "order_statuses", force: :cascade do |t|
-    t.string   "name",       limit: 255
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -215,29 +187,20 @@ ActiveRecord::Schema.define(version: 20180118114207) do
     t.date     "re_date"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "for_month",           limit: 255
+    t.string   "for_month"
     t.text     "payment_ref"
     t.date     "payment_dateline"
     t.boolean  "init_cost"
-    t.boolean  "renovate",                                                 default: false
+    t.boolean  "renovate",            default: false
     t.integer  "serial"
-    t.boolean  "active",                                                   default: true
+    t.boolean  "active",              default: true
     t.integer  "admin_user_id"
     t.date     "payment_date"
     t.boolean  "curso"
-    t.string   "created_by",          limit: 255
-    t.decimal  "sale_price",                      precision: 12, scale: 3
-    t.decimal  "hourly_price",                    precision: 12, scale: 3
-    t.decimal  "subtotal_tutoria",                precision: 12, scale: 3
-    t.decimal  "subtotal_admin",                  precision: 12, scale: 3
-    t.decimal  "tax",                             precision: 12, scale: 3
-    t.decimal  "subsidy",                         precision: 12, scale: 3
-    t.integer  "order_status_id"
-    t.integer  "user_id"
-    t.decimal  "hours",                           precision: 12, scale: 3
-    t.decimal  "creation_cost",                   precision: 12, scale: 3
+    t.string   "created_by"
     t.decimal  "discount"
     t.decimal  "subtotal_sale_price"
+    t.integer  "order_status_id"
     t.integer  "status"
     t.date     "re_dateline"
     t.string   "tarifa"
@@ -247,55 +210,39 @@ ActiveRecord::Schema.define(version: 20180118114207) do
     t.index ["admin_user_id"], name: "index_orders_on_admin_user_id", using: :btree
     t.index ["order_status_id"], name: "index_orders_on_order_status_id", using: :btree
     t.index ["student_id"], name: "index_orders_on_student_id", using: :btree
-    t.index ["user_id"], name: "index_orders_on_user_id", using: :btree
   end
 
   create_table "parents", force: :cascade do |t|
-    t.string   "name",            limit: 255
-    t.string   "email",           limit: 255
-    t.string   "card_id",         limit: 255
+    t.string   "name"
+    t.string   "email"
+    t.string   "card_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "payment"
-    t.string   "address",         limit: 255
-    t.string   "phone_alt1",      limit: 255
-    t.string   "phone_alt2",      limit: 255
-    t.string   "phone_main",      limit: 255
-    t.string   "card_id_type",    limit: 255
+    t.string   "address"
+    t.string   "phone_alt1"
+    t.string   "phone_alt2"
+    t.string   "phone_main"
+    t.string   "card_id_type"
     t.float    "subsidy_amount"
-    t.string   "name_alt",        limit: 255
-    t.string   "email_alt",       limit: 255
-    t.string   "address_alt",     limit: 255
+    t.string   "name_alt"
+    t.string   "email_alt"
+    t.string   "address_alt"
     t.text     "address_comment"
     t.integer  "user_id"
     t.index ["user_id"], name: "index_parents_on_user_id", using: :btree
   end
 
-  create_table "schedules", force: :cascade do |t|
-    t.integer  "schedulable_id"
-    t.string   "schedulable_type", limit: 255
-    t.date     "date"
-    t.time     "time"
-    t.string   "rule",             limit: 255
-    t.string   "interval",         limit: 255
-    t.text     "day"
-    t.text     "day_of_week"
-    t.datetime "until"
-    t.integer  "count"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "students", force: :cascade do |t|
-    t.string   "name",            limit: 255
-    t.string   "email",           limit: 255
-    t.string   "school",          limit: 255
-    t.string   "grade",           limit: 255
+    t.string   "name"
+    t.string   "email"
+    t.string   "school"
+    t.string   "grade"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "address",         limit: 255
-    t.string   "phone",           limit: 255
-    t.string   "calendar_schema", limit: 255
+    t.string   "address"
+    t.string   "phone"
+    t.string   "calendar_schema"
     t.integer  "parent_id"
     t.integer  "admin_user_id"
     t.boolean  "fixed"
@@ -307,17 +254,17 @@ ActiveRecord::Schema.define(version: 20180118114207) do
 
   create_table "tareas", force: :cascade do |t|
     t.integer  "admin_user_id"
-    t.string   "title",         limit: 255
+    t.string   "title"
     t.boolean  "is_done"
     t.date     "due_date"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "status",        limit: 255, default: "Pendiente"
+    t.string   "status",        default: "Pendiente"
     t.index ["admin_user_id"], name: "index_tareas_on_admin_user_id", using: :btree
   end
 
   create_table "tutor_slots", force: :cascade do |t|
-    t.string   "day",        limit: 255
+    t.string   "day"
     t.time     "from_hour"
     t.time     "to_hour"
     t.integer  "tutor_id"
@@ -328,21 +275,19 @@ ActiveRecord::Schema.define(version: 20180118114207) do
 
   create_table "tutoria", force: :cascade do |t|
     t.integer  "order_id"
-    t.string   "subject",         limit: 255
+    t.string   "subject"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "recurrence",      limit: 255
-    t.string   "status",          limit: 255
+    t.string   "recurrence"
+    t.string   "status"
     t.integer  "tutor_id"
     t.float    "duration"
-    t.string   "topic",           limit: 255
+    t.string   "topic"
     t.integer  "students_number"
     t.integer  "sessions"
     t.float    "hours"
-    t.string   "schedule",        limit: 255
+    t.string   "schedule"
     t.date     "first"
-    t.boolean  "fixed"
-    t.time     "at_time"
     t.index ["order_id"], name: "index_tutoria_on_order_id", using: :btree
     t.index ["tutor_id"], name: "index_tutoria_on_tutor_id", using: :btree
   end
@@ -355,15 +300,15 @@ ActiveRecord::Schema.define(version: 20180118114207) do
     t.datetime "updated_at"
     t.float    "duration"
     t.integer  "order_id"
-    t.string   "status",           limit: 255, default: "avaible"
+    t.string   "status",           default: "avaible"
     t.integer  "student_id"
-    t.string   "subject",          limit: 255
+    t.string   "subject"
     t.integer  "serial"
     t.integer  "student_number"
     t.date     "at_date"
     t.time     "at_time"
-    t.string   "recurrence",       limit: 255, default: "fija"
-    t.boolean  "copy",                         default: true
+    t.string   "recurrence",       default: "fija"
+    t.boolean  "copy",             default: true
     t.integer  "extra_horario_id"
     t.integer  "materia_id"
     t.index ["extra_horario_id"], name: "index_tutoria_instances_on_extra_horario_id", using: :btree
@@ -375,32 +320,32 @@ ActiveRecord::Schema.define(version: 20180118114207) do
   end
 
   create_table "tutors", force: :cascade do |t|
-    t.string   "name",                   limit: 255
-    t.string   "email",                  limit: 255, default: "",   null: false
+    t.string   "name"
+    t.string   "email",                  default: "",   null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "encrypted_password",     limit: 255, default: "",   null: false
-    t.string   "reset_password_token",   limit: 255
+    t.string   "encrypted_password",     default: "",   null: false
+    t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                      default: 0,    null: false
+    t.integer  "sign_in_count",          default: 0,    null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
-    t.text     "profile",                            default: [],                array: true
+    t.text     "profile",                default: [],                array: true
     t.integer  "category"
-    t.string   "level",                  limit: 255
-    t.string   "university",             limit: 255
-    t.string   "grade",                  limit: 255
-    t.string   "homephone",              limit: 255
-    t.string   "cellphone",              limit: 255
-    t.string   "major",                  limit: 255
-    t.boolean  "status",                             default: true
-    t.string   "card_id",                limit: 255, default: ""
+    t.string   "level"
+    t.string   "university"
+    t.string   "grade"
+    t.string   "homephone"
+    t.string   "cellphone"
+    t.string   "major"
+    t.boolean  "status",                 default: true
+    t.string   "card_id",                default: ""
     t.text     "specific_experience"
     t.text     "school_experience"
-    t.text     "language_experience",                default: [],                array: true
+    t.text     "language_experience",    default: [],                array: true
     t.integer  "user_id"
     t.boolean  "non_fixed"
     t.index ["email"], name: "index_tutors_on_email", unique: true, using: :btree
@@ -409,21 +354,22 @@ ActiveRecord::Schema.define(version: 20180118114207) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "encrypted_password",     limit: 255, default: "", null: false
-    t.string   "reset_password_token",   limit: 255
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                      default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
-    t.datetime "created_at",                                      null: false
-    t.datetime "updated_at",                                      null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
     t.integer  "role"
-    t.string   "email",                  limit: 255
     t.integer  "user_role_id"
-    t.string   "user_role_type",         limit: 255
+    t.string   "user_role_type"
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
